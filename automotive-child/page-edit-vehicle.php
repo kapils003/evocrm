@@ -1,5 +1,5 @@
 <?php 
-/* Template Name: Edit Customers */
+/* Template Name: Edit Vehicle */
 	get_header(); ?>
     
     <?php if (have_posts()): while (have_posts()) : the_post(); 
@@ -23,7 +23,7 @@
                 wp_reset_postdata();
                 $post_id = $_GET['pid'];
                 if(isset($post_id)) {
-	                update_customer_form($post_id);
+	                update_vehicle_form($post_id);
                 }
                 ?>
         	</div>
