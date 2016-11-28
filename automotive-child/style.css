@@ -24,11 +24,33 @@
    
    Place custom CSS below this line
 ***********************************************************************/
+.side-widget.col-xs-12 {
+    float: left;
+    width: 85%;
+}
+.sidebar-widget .side-widget.col-xs-12:first-child {
+    float: right;
+    width: auto;
+}
+.wp_page .col-full-width.col-lg-push-3 {
+    padding-left: 4px !important;
+    left: 0;
+    width: 100%;
+}
 #menu-sidebar-menu li {
   font-size: 25px !important;
   list-style: none;
-  margin-bottom: 30%
+  margin: 1.95em 0 1.44em;
+  display: block;
+  text-align: center;
 }
+.toggle-collapsed i {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
 /*************************/
 .toolbar {
     padding: 0 0 0 15px;
@@ -46,36 +68,46 @@ nav {
 .left_bar {
    float: left;
 }
-.left_bar p,.pull-right p{
+.left_bar p {
+    font-weight: bold;
+}
+.left_bar p,.pull-right p {
     margin: 6px 0 0 0;
     color: #fff;
 }
 .pull-right {
     text-align: right;
 }
-.pull-right a{
+.pull-right a {
     color: #fff;
 }
 .navbar-header {
     float: left;
     width: 100%;
 }
+.header {
+    position: fixed;
+}
 header .navbar-brand img.main_logo {
     height: 17px;
     width: 18px;
 }
 header .bottom-header .navbar-default .navbar-nav > li > a {
-    color: #000 !important;
     font-size: 12px;
-    font-weight: 300;
-    padding: 0 15px 0 27px !important;
+    font-weight: 600;
+    padding: 0 12px !important;
+    text-transform: capitalize;
+}
+header .bottom-header .navbar-default .navbar-nav > li > a:hover,
+header .bottom-header .navbar-default .navbar-nav > li.active > a {
+    color: #fff;
 }
 header .bottom-header .navbar-default .navbar-brand {
     padding: 2px 0 0;
 }
 div#bs-example-navbar-collapse-1 {
     float: left;
-    width: 30%;
+    width: 28%;
 }
 .logout-link {
     float: right;
@@ -88,51 +120,129 @@ div#bs-example-navbar-collapse-1 {
     padding: 0px 15px 1px 15px;
     color: #fff;
 }
-#menu-sidebar-menu li i:hover:before { 
-    color: #BC2A6C; 
+.menu-sidebar-menu-container li i:hover:before,
+.menu-sidebar-menu-container .current-menu-item a i { 
+    color: #b4206a; 
 }
-.current-menu-item a span {
-    color: #6FA8DC !important;
-}
-.current-menu-item a i {
-    color: #6FA8DC;
-}
+
+
 /********************************/
 .inner-page {
     min-height: 600px;
 }
 /*************toggle************/
-.sidebar-left, .toggle {
-    transition:all .5s ease-in-out;
-    -webkit-transition:all .5s ease-in-out;
-}
-.sidebar-left {
-    background:lightgrey;
-    width:200px;
-    height:100vh;
-    position:absolute;
-    top:0;
-    left:0;
+.sidebar_left, .toggle {
+    transition:all .3s ease-in-out;
+    -webkit-transition:all .3s ease-in-out;
 }
 .toggle {
     cursor:pointer;
+    color: #a8a9ad;
     position:absolute;
-    right:5px;
-    top:5px;
-    width:30px;
-    height:30px;
-    background:black;
+    right: 5px;
+    top: 290px;
+    width: 32px;
+    height: 32px;
 }
 .sidebar-collapsed {
      transform:translateX(-100%);   
     -webkit-transform:translateX(-100%);
 }
 .sidebar-collapsed .toggle {
-    right:-5px;
-     transform:translateX(100%);   
-    -webkit-transform:translateX(100%);   
+    right: -30px;
+    transform:translateX(100%);   
+    -webkit-transform:translateX(100%);
+    position: absolute; 
+    top: 290px;  
 }
-
+.left-arrow {
+    margin-left: -10px;
+}
+.glyphicon-menu-left {
+    vertical-align: middle;
+    color: #2390cf;
+}
+/** Home page style **/
+.wp_page .col-lg-push-3 {
+    left: 23%;
+}
+.inner-page.wp_page {
+    margin-top: 61px;
+    margin-bottom: 0;
+}
+.wp-clock-date {
+    background: #fcf7fa;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    width: 60%;
+    margin-right: 5px;
+    padding: 5px;
+    color: #bcbdc0;
+    font-weight: 600;
+}
+.wp-evo-logo {
+    background: #f4faf7;
+    min-height: 240px;
+    float: left;
+    width: 39.4%;
+    text-align: center;
+    padding: 5px;
+}
+.wp-evo-logo img {
+    border: 0;
+}
+.wp-home-total {
+    float: left;
+    color: #bcbdc0;
+    font-size: 48px;
+    font-weight: 500;
+    width: 32%;
+    margin: 8px 5px 8px 0;
+    padding: 20px 5px 10px;
+    min-height: 240px;
+    line-height: 1;
+    word-break: break-word;
+}
+.wp-total-customers {
+    background: #ebe6e7;
+}
+.wp-total-sales {
+    background: #faecf4;
+}
+.wp-total-vehicles {
+    background: #f4f3f9;
+    margin-right: 0;
+    width: 35%;
+}
+.wp-home-sticky-notes {
+    background: #fbfcf3;
+    color: #bcbdc0;
+    font-weight: 500;
+    font-size: 48px;
+    float: left;
+    padding: 20px 5px 10px;
+    min-height: 185px;
+    width: 100%;
+}
+#stick-notes-form {
+    font-size: 16px;
+    margin-top: 1.5em;
+}
+@media (min-width: 1200px) {
+    .wp_page .col-lg-9 {
+        width: 76.8%;
+    } 
+}
+@media (min-width: 320px) {
+    section.content {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+.copyright-wrap {
+    display: none;
+}
 /*************Add Vehicle Form**********/
 .vehicle-details .inner {
     display: flex;
@@ -147,20 +257,19 @@ div#bs-example-navbar-collapse-1 {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 20%;
-    /* background: #ccc; */
     margin: 10px .165%;
     display: flex;
     flex-direction: column;
 }
 @media only screen and (min-width: 600px) and (max-width: 1024) {
-	.vehicle-details .inner > div {
-		flex-basis: 45%;
-	}
+    .vehicle-details .inner > div {
+        flex-basis: 45%;
+    }
 }
 @media screen and (max-width: 599px) {
-	.vehicle-details .inner > div {
-		flex-basis: 100%;
-	}
+    .vehicle-details .inner > div {
+        flex-basis: 100%;
+    }
 }
 .vehicle-details {
     display: block;
@@ -174,9 +283,24 @@ div#bs-example-navbar-collapse-1 {
 }
 .vehicle-details .inner > div div {
     width: 100%;
+    text-align: center;
+}
+.vehicle-details .inner label {
+    text-align: center;
 }
 .vehicle-details textarea {
-    width: 94%;
+    width: 100%;
+}
+.inner input[type="email"] {
+    width: 100%;
+}
+.button-submit {
+    padding: 10px;
+    text-align: center;
+}
+.company-name {
+    margin: 0 auto;
+    width: 50% !important;
 }
 .vehicle-details .heading {
     background: #1e73be none repeat scroll 0 0;
@@ -197,9 +321,7 @@ div#bs-example-navbar-collapse-1 {
 }
 
 .vehicle-details select {
-    /*border-color: #0099ff;*/
     background: #fff;
-    /*padding: 6px 0px 0 0;*/
 }
 .vehicle-details button {
     background: #fff;
@@ -214,26 +336,157 @@ div#bs-example-navbar-collapse-1 {
     position: relative;
 }
  div >input{
-	border-radius:7px;
+    border-radius:5px;
 }
 select >option{
-width:100%;
-padding: 0px;
-margin: 8px 5px;
-font-family:arial;
-line-height: 2px;
-border-radius:5px;
-/*background-color:#A2AB58;
-color:#ff0;*/
-font-size:15px;
--webkit-appearance:none;
-/*box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.6);*/
-outline:none
-border-top: 2px solid whitesmoke;
-border-bottom: 2px solid whitesmoke;
-padding-left:6%;
+    width:100%;
+    padding: 0px;
+    margin: 8px 5px;
+    font-family:arial;
+    line-height: 2px;
+    border-radius:5px;
+    font-size:15px;
+    -webkit-appearance:none;
+    outline:none
+    border-top: 2px solid whitesmoke;
+    border-bottom: 2px solid whitesmoke;
+    padding-left:6%;
 }
-/*css for customer form*/
+
+.page-content .add-vehicle-form .select-style 
+{
+    background: #FFF;
+    overflow: hidden;
+    display: inline-block;
+    color: #525252;
+    font-weight: 300;
+    -webkit-border-radius: 5px 4px 4px 5px/5px 5px 4px 4px;
+    -moz-border-radius: 5px 4px 4px 5px/5px 5px 4px 4px;
+    border-radius: 5px 4px 4px 5px/5px 5px 4px 4px;
+    -webkit-box-shadow: 0 0 5px rgba(123, 123, 123, 0.2);
+    -moz-box-shadow: 0 0 5px rgba(123,123,123,.2);
+    box-shadow: 0 0 5px rgba(123, 123, 123, 0.2);
+    font-family: "helvetica neue",arial;
+    position: relative;
+    cursor: pointer;
+    padding-right:20px;
+
+}
+.page-content .add-vehicle-form .select-style span
+{
+    position: absolute;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: url(http://www.evocrm.co.uk/wp-content/uploads/2016/11/arrow.png) no-repeat;
+    top: 50%;
+    margin-top: -4px;
+}
+.page-content .add-vehicle-form .select-style select
+{
+    -webkit-appearance: none;
+    appearance:none;
+    width:120%;
+    background:none;
+    background:transparent;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    padding:7px 0px;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0 auto;
+}
+.page-content .add-vehicle-form .inner input {
+    height: 37px;
+    text-align: center;
+    text-transform: capitalize;
+    background: #fff;
+}
+.page-content .add-vehicle-form input[type=checkbox] {
+    width: 100%;
+}
+.page-content .add-vehicle-form .inner label {
+    text-align: center;
+}
+
+/* search listing */
+.search-listing .row-list {
+    border-bottom: 1px solid #e9e9e9;
+    display: inline-block;
+    width: 100%;
+    padding: 1.5em 1em;
+}
+.row-list figure {
+    float: left;
+    margin-right: 2em;
+}
+.search-listing .row-list:nth-child(10) {
+    border-bottom: 0;
+}
+.row-wrapper {
+   float: left;
+   width: calc(100% - 20%);
+} 
+.row-wrapper .col-one {
+    margin-right: 1em;
+    border-right: 1px solid #f0f1ef;
+    padding-right: 1em;
+}
+.row-wrapper .col-one,
+.row-wrapper .col-two {
+    float: left;
+    width: 48%;
+}
+.row-wrapper label {
+    color: #1e73be;
+    width: 25%;
+}
+.button-action {
+    clear: left;
+}
+.button-action .edit-button,
+.gallery-button,.delete-button {
+    float: left;
+    margin-right: 1em;
+}
+.button-action a {
+    border-radius: 4px; 
+    border: 1px solid;  
+    padding: .1em 1.4em;
+    margin-top: 1em;
+    display: inline-block;
+    text-align: center;
+    height: 28px;
+    width: 110px;
+}
+.button-action .edit-button a,
+.gallery-button a:hover {
+    background: #1ba048;
+    border-color: #1ba048;
+    color: #fff;
+}
+.gallery-button a,
+.delete-button a:hover,
+.button-action .edit-button a:hover {
+    background: #1e73be;
+    color: #fff;
+    border-color: #1e73be;
+}
+.delete-button a {
+    background: #fff;
+    border: 1px solid #1e73be;
+    color: #1e73be;
+}
+.no-image {
+    border: 1px solid #000;
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    line-height: 10em;
+}
+
+/*css for Search Filters*/
 #customer-search {
     width: 16%;
     float: left;
@@ -266,58 +519,9 @@ padding-left:6%;
   background-color: #6FA8DC;
 }
 
-
-.customer-details {
-    clear: both;
-
-}
-
-.customer-details th {
-    width: 17%;
-}
-.edit_button > a {
-    background-color: #1e73be;
-    border-radius: 5%;
-    padding: 6px 14px;
-}
-
-.customer-details .edit_button > a:link {
-    color: #fff;
-    font-weight: normal;
-    text-shadow: none;
-    text-decoration: none;
-}
-.page-id-23 .customer-details .delete_button{
-    border-right: none;
-}
-.page-id-23 .customer-details .delete_button > a {
-    background-color: #1e73be;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: normal;
-    padding: 6px 14px;
-    text-shadow: none;
-}
-.page-id-23 .customer-details .delete_button > a:hover {
-    color: #fff;
-    font-weight: normal;
-    text-shadow: none;
-    text-decoration: none;
-}
-
-.customer-details tr:nth-child(2n+1) td {
-    border-left: 0 none;
-}
-.edit_button > a:hover {
-    background-color: #6FA8DC;
-}
-.delete_button > a:hover {
-    background-color: #6FA8DC !important;
-}
-
 input[type='text'],select,textarea,input[type='date'] {
-	width: 100%;
-	padding-left: 10px;
+    width: 100%;
+    padding-left: 10px;
 }
 
 .dvla-search {
@@ -372,7 +576,8 @@ input[type='text'],select,textarea,input[type='date'] {
     margin-right: .5em;
 }  
 
-.vehicle-form-fourth-row {
+.vehicle-form-fourth-row, .vehicle-form-second-row, 
+.vehicle-form-third-row {
     clear: left;
 }
 
@@ -392,11 +597,153 @@ input[type='text'],select,textarea,input[type='date'] {
     font-size: 18px;
 }
 
-.customer-details tbody .delete_button a:hover {
+
+
+.wp_page is_sidebar {
+    position: relative;
+}
+
+.sidebar_left {
+    position: fixed;
+    background: #e9e9e9;
+    left: -15px;
+    top: 60px;
+}
+
+.menu-sidebar-menu-container .menu {
+    padding: 0;
+}
+
+.menu-sidebar-menu-container .menu li a {
+    display: block;
+}
+
+.menu-sidebar-menu-container .menu li a span {
+    color: #000;
+    display: block;
+}
+
+.menu-sidebar-menu-container .menu li a i._mi._before {
+    font-size: 2.4em;
+    margin: 0;
+}
+
+/************************************* Vehicle Table CSS **************************************/
+.customer-details {
+    clear: both;
+}
+.edit_button > a {
+    background-color: #1f9c49;
+    border-radius: 5px;
+    padding: 6px 12px;
+    color: #fff;
+}
+
+.customer-details .edit_button > a:link {
     color: #fff;
     font-weight: normal;
     text-shadow: none;
-    opacity: 1;
-    padding: 6px;
     text-decoration: none;
+}
+.edit_button > a:hover {
+    background-color: #2390cf;
+}
+.wp_page .page-content .customer-details {
+    border: none;
+    width: 100%;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: #08c;
+}
+.post-entry table a:visited {
+    color: #fff !important;
+}
+
+.post_status {
+    color: red;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/****************************** Reports Page Css ***********************/
+
+#chart {                        
+    height: 360px;                                  
+    position: relative;                   
+    width: 360px;                                                 
+    }                                                                 
+.tooltip {                                                      
+    background: #eee;                                             
+    box-shadow: 0 0 5px #999999;                            
+    color: #333;                                            
+    display: none;                                            
+    font-size: 12px;     
+    left: 130px;                               
+    padding: 10px;                                       
+    position: absolute;                                        
+    text-align: center;                                     
+    top: 95px;                                                 
+    width: 80px;                                                    
+    z-index: 10;                                                   
+}                                                                
+.legend {
+    font-size: 12px;
+}
+rect {
+    stroke-width: 2;
+}
+.axis path,
+.axis line {
+  stroke: #000;
+}
+
+.bar {
+  fill: orange;
+}
+
+.bar:hover {
+  fill: orangered ;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}                             
+.wordpress-ajax-form {
+    margin: 0 auto;
+    width: 20%;
+}
+#chart {
+    float: left;
+    margin-left: 2%;
+    margin-top: 10%;
+}
+#barchart {
+    float: right;
+    margin-top: 10%;
+    width: 60% !important;
 }

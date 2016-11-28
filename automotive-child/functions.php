@@ -3,6 +3,7 @@ add_action( 'wp_enqueue_scripts', 'wp_custom_scripts');
 function wp_custom_scripts() {
 	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js', array( 'jquery' ), '1.0', true );
 }
+show_admin_bar(false); //disable toolbar for all the users
 function app_output_buffer() {
 	ob_start();
 } // soi_output_buffer
@@ -12,7 +13,6 @@ function app_destroy_person( $person_id ) {
 	// Include the necessary library to delete a person
 	include_once( 'wp-admin/includes/user.php' );
 	wp_delete_user( $person_id );
-
 	// Redirect back to the Person listing
 	wp_redirect( app_get_permalink_by_slug( 'all', 'person' ) );
 	exit;
@@ -40,7 +40,7 @@ function dvla_add_vehicle_form() {
 				session_start();
 				$_SESSION['dvla_invalide'] = $result->message;
 				wp_redirect(home_url().'/vehicles');
-				exit();
+				exit;
 			} else { 
 				dvla_vehicle_form($result, $licenceplate);
 			}
@@ -53,7 +53,7 @@ function dvla_vehicle_form($result, $licenceplate) {
 	$motDetails = strtotime(substr($result->motDetails,8));
 	$motDate = date("m/d/Y",$motDetails);
 	?>
-<form method="post" action="<?php echo home_url().'/vehicles/'; ?> ">
+<form method="post" class="add-vehicle-form" action="<?php echo home_url().'/vehicles/'; ?> ">
 	<input type="hidden" name="vehicle-hidden" value="vehicles">
 	<div class="vehicle-details">
 		<p class="heading">Vechile Details-Stock Information</p>
@@ -68,49 +68,52 @@ function dvla_vehicle_form($result, $licenceplate) {
 		</div>
 		<div class="reg-letter">
 			<label for="">Reg Letter</label>
-			<div>
-			<select name="regLetter" id="reg_letter">
-				<option value="s">S</option>
-				<option value="f">F</option>
-				<option value="v">v</option>
-				<option value="h">H</option>
-				<option value="g">G</option>
-			</select>
+			<div class="select-style">
+				<select name="regLetter" id="reg_letter">
+					<option value="s">S</option>
+					<option value="f">F</option>
+					<option value="v">v</option>
+					<option value="h">H</option>
+					<option value="g">G</option>
+				</select>
+				<span></span>
 			</div>
-
 		</div>
 		<div>
 			<label for="">Reg Date</label>
 			<div>
 				<input type="text" id="date_1" class="datepick" name="regDate" value="<?php echo $reg_date; ?>"></div>
 			</div>
-		<div>
-			<label for="">Priv Plate</label>
-			<div><input type="text" name="privPlate" id="priv_plate"></div>
-		</div>
 		</div>
 		<div class="inner">
 			<div>
-				<label for="">Sale type</label>
+				<label for="">Priv Plate</label>
 				<div>
+					<input type="text" name="privPlate" placeholder="Private Plate" id="priv_plate">
+				</div>
+			</div>
+			<div>
+				<label for="">Sale type</label>
+				<div class="select-style">
 					<select name="saleType" id="sale_type">
 						<option value="">Van-used</option>
-						<option value="">sdafja</option>
+						<option value="">Van not used</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Vat type</label>
-				<div>
+				<div class="select-style">
 					<select name="vatType" id="vat_type">
 						<option value="">Commercial</option>
-						<option value="">sadfaf</option>
+						<option value="">illigal</option>
 					</select>
 				</div>
 			</div>
 			<div>
 				<label for="">Retail Price</label>
-				<div><input type="text" name="retailPrice" id="retail_price" value="0.00"></div>
+				<div><input type="text" name="retailPrice" id="retail_price" value="" placeholder="Enter Vehicle Price"></div>
 			</div>
 		</div>
 		<div class="inner">
@@ -132,27 +135,26 @@ function dvla_vehicle_form($result, $licenceplate) {
 					<input type="text" name="vyear" id="year" value="<?php echo $result->yearOfManufacture; ?>">
 				</div>
 			</div>
+			<div>
+				<label for="">Description</label>
+				<input type="text" name="vehDes" placeholder="Vehicle Short Description" id="veh_desc" value="">
+			</div>
 		</div>
 		<div class="inner">
 			<div>
-				<label for="">Description</label>
-				<input type="text" name="vehDes" id="veh_desc" value="">
-			</div>
-			<div>
 				<label for="">Import</label>
-				<div>
+				<div class="select-style">
 					<select name="import" id="import">
 						<option value="">Yes</option>
 						<option value="">No</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Hide Finance</label>
 				<div><input type="checkbox" name="hideFinance" id="hide_finance" value="1">Hide finance on website</div>
 			</div>
-		</div>
-		<div class="inner">
 			<div>
 				<label for="">VIN/Chassis No.</label>
 				<div><input type="text" name="vin" id="vin" value="<?php echo $result->vin; ?>"></div>
@@ -161,28 +163,29 @@ function dvla_vehicle_form($result, $licenceplate) {
 				<label for="">Engine No.</label>
 				<div><input type="text" name="engineNo" id="engine_no" value="sdlkja"></div>
 			</div>
+		</div>
+		<div class="inner">
 			<div>
 				<label for="">Advert Mileage</label>
-				<div><input type="text" name="advertMileage"></div>
+				<div><input type="text" placeholder="Advert Mileage" name="advertMileage"></div>
 			</div>
 			<div>
 				<label for="">Actual Mileage</label>
-				<div><input name="actualMileage" id="actual_mileage" type="text"></div>
+				<div><input name="actualMileage" placeholder="Actual Mileage" id="actual_mileage" type="text"></div>
 			</div>
 			<div>
 				<label for="">Ins Group</label>
-				<div>
+				<div class="select-style">
 					<select name="insGroup" id="ins_group">
 						<option value="">34</option>
 						<option value="">32</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
-		</div>
-		<div class="inner">
 			<div>
 				<label for="">Colour</label>
-				<div>
+				<div class="select-style">
 					<select name="colour" id="colour">
 					<?php 
 						$colours = array('Silver','Red','Green','Black','White','Grey');
@@ -193,21 +196,24 @@ function dvla_vehicle_form($result, $licenceplate) {
 							<option value="<?php echo $colour; ?>" <?php if( ($result_colour) && !empty($result_colour) ) selected($result_colour, $colour); ?>><?php echo esc_attr($colour); ?></option>
 					<?php } ?>
 					</select>
+					<span></span>
 				</div>
 			</div>
+		</div>
+		<div class="inner">
 			<div>
 				<label for="">Former Oweners (view)</label>
-				<div>
+				<div class="select-style">
 					<select name="formerOwner" id="">
 						<option value="">1</option>
 						<option value="">2</option>
 					</select>
-					<input type="checkbox" name="hideWeb" value="1">Hide on web
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Status</label>
-				<div>
+				<div class="select-style">
 					<select name="status" id="status">
 						<option value="due in 7 days">Due in 7 days</option>
 						<option value="due in 14 days">Due in 14 days</option>
@@ -219,40 +225,41 @@ function dvla_vehicle_form($result, $licenceplate) {
 						<option value="in stock">In Stock</option>
 						<option value="in transit">In Transit</option>
 						<option value="ordered">Ordered</option>
-
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Grading</label>
-				<div>
+				<div class="select-style">
 					<select name="grading" id="grading">
 						<option value="">Select</option>
-						<option value="">sdfa</option>
+						<option value="">One</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Key Tag</label>
-				<div>
+				<div class="select-style">
 					<select name="keyTag" id="key_tag">
 						<option value="">--</option>
 						<option value=""></option>
 					</select>
 				</div>
 			</div>
+		</div>
+		<div class="inner">
 			<div>
 				<label for="">Location</label>
-				<div>
+				<div class="select-style">
 					<select name="location" id="location">
 						<option value="">Location 1</option>
 						<option value=""></option>
 					</select>
+					<span></span>
 				</div>
 			</div>
-			
-		</div>
-		<div class="inner">
 			<div>
 				<label for="">Current MOT Date</label>
 				<div><input type="text" id="date_2" class="datepick" name="motDate1" value="30/09/2011"></div>
@@ -265,93 +272,101 @@ function dvla_vehicle_form($result, $licenceplate) {
 				<label for="">Next MOT Date</label>
 				<div><input type="text" id="date_3" class="datepick" name="motDate2" value="<?php echo $motDate; ?>"></div>
 			</div>
+		</div>
+		<div class="inner">
 			<div>
 				<label for="">Motability</label>
-				<div>
+				<div class="select-style">
 					<select name="motability" id="motability">
 						<option value="">NO</option>
 						<option value="">YES</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
-		</div>
-		<div class="inner">
 			<div>
 				<label for="">Radio code</label>
-				<div><input type="text" name="radioCode" id="radio_code"></div>
+				<div><input type="text" placeholder="Radio code" name="radioCode" id="radio_code"></div>
 			</div>
 			<div>
 				<label for="">Alarm code</label>
-				<div><input type="text" name="alarmCode" id="alarm_code"></div>
+				<div><input type="text" placeholder="Alarm code" name="alarmCode" id="alarm_code"></div>
 			</div>
 			<div>
 				<label for="">Ig Key No</label>
-				<div><input type="text" name="igKey" id="ig_key"></div>
-			</div>
-			<div>
-				<label for="">Door Key No</label>
-				<div><input type="text" name="doorKey" id="door_key"></div>
-			</div>
-			<div>
-				<label for="">Spare Keys</label>
-				<div><input type="checkbox" name="spareKey" id="spare_keys" value="1"></div>
+				<div><input type="text" placeholder="Ig key no" name="igKey" id="ig_key"></div>
 			</div>
 		</div>
 		<div class="inner">
 			<div>
+				<label for="">Door Key No</label>
+				<div><input type="text" placeholder="Door key no" name="doorKey" id="door_key"></div>
+			</div>
+			<div>
+				<label for="">Spare Keys</label>
+				<div><input type="checkbox" placeholder="Spare keys" name="spareKey" id="spare_keys" value="1"></div>
+			</div>
+			<div>
 				<label for="">V5</label>
-				<div>
+				<div class="select-style">
 					<select name="v5" id="v5">
 						<option value="yes">Yes</option>
 						<option value="no">No</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">V5 Number</label>
-				<div><input type="text" name="v5No" id="v5_no"></div>
+				<div><input type="text" placeholder="V5 number" name="v5No" id="v5_no"></div>
 			</div>
+		</div>
+		<div class="inner">
 			<div>
 				<label for="">Tax</label>
-				<div>
+				<div class="select-style">
 					<select name="tax" id="tax">
 						<option value="yes">Yes</option>
 						<option value="no">No</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">HPI</label>
-				<div>
+				<div class="select-style">
 					<select name="hpi" id="hpi">
 						<option value="yes">Yes</option>
 						<option value="no">No</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Mileage Check</label>
-				<div>
+				<div class="select-style">
 					<select name="mileageCheck" id="mileage_check">
 						<option value="checked">Checked</option>
 						<option value="not checked">Not Checked</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Service Check</label>
-				<div>
+				<div class="select-style">
 					<select name="serviceCheck" id="service_check">
 						<option value="cheked">Checked</option>
 						<option value="not checked">Not Checked</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 		</div>
 		<div class="inner">
 			<div>
 				<label for="">Purchase date</label>
-				<div><input type="text" name="purchaseDate" id="date_4" class="datepick" value="09/07/2011"></div>
+				<div><input type="text" placeholder="Purchase date" name="purchaseDate" id="date_4" class="datepick" value="09/07/2011"></div>
 			</div>
 			<div>
 				<label for="">Dealer PI ref</label>
@@ -363,26 +378,27 @@ function dvla_vehicle_form($result, $licenceplate) {
 			</div>
 			<div>
 				<label for="">Purchase price</label>
-				<div><input type="text" name="purchasePrice" id="purchase_price"></div>
-			</div>
-			<div>
-				<label for="">Supplier Inv No</label>
-				<div><input type="text" name="supplierInvNo" id="supplier_inv_no"></div>
+				<div><input type="text" placeholder="Purchase price" name="purchasePrice" id="purchase_price"></div>
 			</div>
 		</div>
 		<div class="inner">
 			<div>
+				<label for="">Supplier Inv No</label>
+				<div><input type="text" placeholder="Supplier invoice number" name="supplierInvNo" id="supplier_inv_no"></div>
+			</div>
+			<div>
 				<label for="">Source</label>
-				<div>
+				<div class="select-style">
 					<select name="source" id="source">
 						<option value="">Trade</option>
 						<option value=""></option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Supplier</label>
-				<div>
+				<div class="select-style">
 					<select name="supplier" id="supplier">
 						<option value=""> --Choose-- </option>
 						<?php
@@ -393,44 +409,58 @@ function dvla_vehicle_form($result, $licenceplate) {
 							<option value="<?php echo $supplier; ?>" <?php if( ($result_supplier) && !empty($result_supplier) ) selected($result_supplier, $supplier); ?>><?php echo esc_attr($supplier); ?></option>
 						<?php } ?>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Buyer</label>
-				<div><select name="buyer" id="buyer">
+				<div class="select-style">
+					<select name="buyer" id="buyer">
 						<option value="">--Choose--</option>
 						<option value=""></option>
-					</select></div>
-			</div>
-			<div>
-				<label for="">Sale or return</label>
-				<div><select name="saleOrReturn" id="sale_or_return">
-						<option value="">Yes</option>
-						<option value=""></option>
-					</select></div>
+					</select>
+					<span></span>
+				</div>
 			</div>
 		</div>
 		<div class="inner">
+			<div>
+				<label for="">Hide on Web</label>
+				<div>
+					<input type="checkbox" name="hideWeb" value="1">
+				</div>
+			</div>
+			<div>
+				<label for="">Sale or return</label>
+				<div class="select-style">
+					<select name="saleOrReturn" id="sale_or_return">
+						<option value="">Yes</option>
+						<option value=""></option>
+					</select>
+					<span></span>
+				</div>
+			</div>
 			<div>
 				<label for="">Supplier details</label>
 				<div>no trade</div>
 			</div>
 			<div>
 				<label for="">Stock comments</label>
-				<div><textarea name="stockComments" id="stock_comments" cols="30" rows="10"></textarea></div>
+				<div><textarea name="stockComments" placeholder="Stock comments" id="stock_comments" cols="30" rows="10"></textarea></div>
 			</div>
 		</div>
-		
 	</div>
 	<div class="vehicle-details">
 	<p class="heading">Vechile Details-Details</p>
 		<div class="inner">
 			<div>
 				<label for="">History</label>
-				<div><select name="history" id="history">
+				<div class="select-style">
+					<select name="history" id="history">
 						<option value="">--Choose--</option>
 						<option value=""></option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
@@ -443,11 +473,14 @@ function dvla_vehicle_form($result, $licenceplate) {
 			</div>
 			<div>
 				<label for="">BHP</label>
-				<div><input type="text" name="bhp" id="bhp" value=""></div>
+				<div><input type="text" name="bhp" placeholder="BHP" id="bhp" value=""></div>
 			</div>
+		</div>
+		<div class="inner">
 			<div>
 				<label for="">Warrenty</label>
-				<div><select name="warrenty" id="warrenty">
+				<div class="select-style">
+					<select name="warrenty" id="warrenty">
 						<option value="">none</option>
 						<option value="balance of dealers">Balance of Dealers</option>
 						<option value="balance of makers">Balance of Makers</option>
@@ -457,17 +490,16 @@ function dvla_vehicle_form($result, $licenceplate) {
 						<option value="24 months">24 Months</option>
 						<option value="36 months">36 Months</option>
 					</select>
+					<span></span>
 				</div>
 			</div>
-		</div>
-		<div class="inner">
 			<div>
 				<label for="">Engine size</label>
-				<div><input type="text" name="engineSize" id="engine_size" value="<?php echo $result->cylinderCapacity.' /'.$result->co2Emissions ; ?>"></div>
+				<div><input type="text" name="engineSize" placeholder="Engine size" id="engine_size" value="<?php echo $result->cylinderCapacity.' /'.$result->co2Emissions ; ?>"></div>
 			</div>
 			<div>
 				<label for="">Fuel type</label>
-				<div>
+				<div class="select-style">
 					<select name="fuelType" id="fuel_type">
 					<?php 
 					$fuelTypes = array('Diesel','Petrol');
@@ -478,19 +510,24 @@ function dvla_vehicle_form($result, $licenceplate) {
 						<option value="<?php echo $fuelType; ?>" <?php if( ($result_fuel) && !empty($result_fuel) ) selected($result_fuel, $fuelType); ?>><?php echo esc_attr($fuelType); ?></option>
 					<?php } ?>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Engine type</label>
-				<div><select name="engineType" id="engine_type">
+				<div class="select-style">
+					<select name="engineType" id="engine_type">
 						<option value="">--choose--</option>
 						<option value=""></option>
 					</select>
+					<span></span>
 				</div>
 			</div>
+		</div>
+		<div class="inner">
 			<div>
 				<label for="">Transmission</label>
-				<div>
+				<div class="select-style">
 					<select name="vtransmission" id="transmission">
 					<?php 
 					$transmissions = array('Automatic','Manual');
@@ -501,21 +538,22 @@ function dvla_vehicle_form($result, $licenceplate) {
 						<option value="<?php echo $transmission; ?>" <?php if( ($result_trans) && !empty($result_trans) ) selected($result_trans, $transmission); ?>><?php echo esc_attr($transmission); ?></option>
 					<?php } ?>
 					</select>
+					<span></span>
 				</div>
 			</div>
-		</div>
-		<div class="inner">
 			<div>
 				<label for="">Gears</label>
-				<div><select name="gears" id="gears">
+				<div class="select-style">
+					<select name="gears" id="gears">
 						<option value="">6</option>
 						<option value=""></option>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Drive</label>
-				<div>
+				<div class="select-style">
 					<select name="drive" id="drive">
 						<option value=""> --Choose-- </option>
 						<?php
@@ -526,18 +564,24 @@ function dvla_vehicle_form($result, $licenceplate) {
 							<option value="<?php echo $drive; ?>" <?php if( ($result_drive) && !empty($result_drive) ) selected($result_drive, $drive); ?>><?php echo esc_attr($drive); ?></option>
 						<?php } ?>
 					</select>
+					<span></span>
 				</div>
 			</div>
 			<div>
 				<label for="">Body type</label>
-				<div><select name="bodyType" id="body_type">
+				<div class="select-style">
+					<select name="bodyType" id="body_type">
 						<option value="">Couple</option>
 						<option value=""></option>
-					</select></div>
+					</select>
+					<span></span>
+				</div>
 			</div>
+		</div>
+		<div class="inner">
 			<div>
 				<label for="">Doors</label>
-				<div>
+				<div class="select-style">
 					<select name="doors" id="doors">
 					<?php 
 					$doors = array('1','2','3','4','5','6');
@@ -545,39 +589,42 @@ function dvla_vehicle_form($result, $licenceplate) {
 						<option value="<?php echo $door; ?>" <?php if( ($result->numberOfDoors) && !empty($result->numberOfDoors) ) selected($result->numberOfDoors, $door); ?>><?php echo esc_attr($door); ?></option>
 					<?php } ?>
 					</select>
+					<span></span>
 				</div>
 			</div>
-		</div>
-		<div class="inner">
 			<div>
 				<label for="">Group</label>
 				<div>(+3)</div>
 			</div>
 			<div>
 				<label for="">Trim type</label>
-				<div><select name="trimType" id="trim_type">
+				<div class="select-style">
+					<select name="trimType" id="trim_type">
 						<option value="">--choose--</option>
 						<option value=""></option>
+						<span></span>
 					</select>
 				</div>
 			</div>
 			<div>
 				<label for="">Trim Colour</label>
-				<div><select name="trimColour" id="trim_colour">
+				<div class="select-style">
+					<select name="trimColour" id="trim_colour">
 						<option value="">--choose--</option>
 						<option value=""></option>
 					</select>
+					<span></span>
 				</div>
-			</div>
-			<div>
-				<label for="">YouTube ID</label>
-				<div><input name="youtube_id" id="youtube_id" type="text"></div>
 			</div>
 		</div>
 		<div class="inner">
 			<div>
+				<label for="">YouTube ID</label>
+				<div><input name="youtube_id" placeholder="Youtube ID" id="youtube_id" type="text"></div>
+			</div>
+			<div>
 				<label for="">Service Comments</label>
-				<div><textarea name="serviceComments" id="service_comments" cols="30" rows="10"></textarea></div>
+				<div><textarea name="serviceComments" placeholder="Service comments" id="service_comments" cols="30" rows="10"></textarea></div>
 			</div>
 		</div>
 	</div>
@@ -847,12 +894,13 @@ function get_vahicles() {
 	    $wp_query->query( $args );
 	}
 	if($wp_query->post_count == 0) {
-		echo '<div class="post_count">No data found!!</div>';
+		echo '<div class="post_status">No data found!!</div>';
 	}
 	else {
-		echo '<div class="post_count">'.$wp_query->post_count.'</div>';
+		//echo '<div class="post_count">'.$wp_query->post_count.'</div>';
 	}
-    echo '<table class="customer-details"><th>Reg Number</th><th>Make</th><th>Model</th><th>Colour</th><th>Price</th><th>Mileage</th>';
+    //echo '<table class="customer-details"><th>Vehicle Image</th><th>Reg Number</th><th>Make</th><th>Model</th><th>Colour</th><th>Price</th><th>Mileage</th>';
+    echo '<div class="search-listing">';
     while ($wp_query->have_posts()) : $wp_query->the_post();
         $post_id = get_the_ID();
         $regNo = get_the_title( $post_id );
@@ -861,12 +909,52 @@ function get_vahicles() {
     	$colour = get_post_meta($post_id,'exterior-color',true);
     	$price = get_post_meta($post_id,'price',true);
     	$mileage = get_post_meta($post_id,'mileage',true);
-    	echo '<tr><td>'.$regNo.'</td><td>'.$make .'</td><td>'.$model .'</td><td>'.$colour.'</td><td>'.$price.'</td><td>'.$mileage.'</td></tr>';
-    	echo '<tr><td class="edit_button"><a href ="'.home_url().'/edit-vehicle/?pid='.$post_id.'">Edit</a></td>';
-    	echo "<td class='delete_button'><a href=\"".get_delete_post_link( $post_id )."\"onclick=\"return confirm('Are you sure, you want to delete?')\">Delete</a>";
-    	echo "</td><td></td><td></td><td></td><td></td></tr>";
+    	$thumbnail_id = get_post_meta($post_id, '_thumbnail_id', true);
+    	$thumbnail = wp_get_attachment_image($thumbnail_id[0]);
+    	echo '<div class="row-list">';
+    	if(!empty($thumbnail)) {
+    		echo "<figure>".$thumbnail."</figure>";
+    	} else {
+    		echo "<figure class='no-image'>No Image</figure>";;
+    	}
+    	echo '<div class="row-wrapper">';
+    	echo '<div class="col-one">
+            	<div class="reg">
+	                <label> Rag Number</label>
+	                <span>'.$regNo.'</span>
+            	</div>
+            	<div class="make">
+	                <label> Make</label>
+	                <span>'.$make.'</span>
+            	</div>
+            	<div class="model">
+	                <label> Model</label>
+	                <span>'.$model.'</span>
+            	</div>    
+        	</div>
+        	<div class="col-two">
+            <div class="color">
+                <label> Colour</label>
+                <span>'.$colour.'</span>
+            </div>
+            <div class="vehicle-price">
+                <label> Price </label>
+                <span>'.$price.'</span>
+            </div>
+            <div class="milage">
+                <label> Milage</label>
+                <span>'.$mileage.'</span>
+            </div>    
+	        </div>
+	        <div class="button-action">    
+	            <div class="edit-button"><a href ="'.home_url().'/edit-vehicle/?pid='.$post_id.'">Edit</a></div>
+	            <div class="gallery-button"><a href ="'.home_url().'/vehicle-gallery/?pid='.$post_id.'">Add Gallery</a></div>
+	            <div class="delete-button"><a href=\''.get_delete_post_link( $post_id ).'\'onclick=\'return confirm("Are you sure, you want to delete?")\'>Delete</a></div>
+	        </div> 
+	        </div>   
+    		</div>';
     endwhile;
-    echo "</table>";
+    /*echo "</table>";*/
     next_posts_link('next');
     previous_posts_link('previous');
     wp_reset_query();
@@ -942,7 +1030,7 @@ function update_vehicle_form($listing_id) {
 	$getWeb = get_post_meta($listing_id, 'hide-web', true);
 	$getComments = get_post_meta($listing_id, 'service-comments', true);
 	?>
-	<form method="post">
+	<form method="post" class="add-vehicle-form">
 	<input type="hidden" name="edit-vehicle" value="editVehicle">
 	<div class="vehicle-details">
 		<p class="heading">Vechile Details-Stock Information</p>
@@ -953,7 +1041,7 @@ function update_vehicle_form($listing_id) {
 			</div>
 		<div>
 			<label for="">Reg No.</label>
-			<div><input type="text" name="regNo" value="<?php echo $regNo; ?>" placeholder="Registration Number"></div>
+			<div><input type="text" name="regNo" value="<?php echo $regNo; ?>" placeholder="Vehicle Registration Number"></div>
 		</div>
 		<div class="reg-letter">
 			<label for="">Reg Letter</label>
@@ -978,7 +1066,7 @@ function update_vehicle_form($listing_id) {
 			</div>
 		<div>
 			<label for="">Priv Plate</label>
-			<div><input type="text" name="privPlate" id="priv_plate" value="<?php echo $getPrivPlate; ?>"></div>
+			<div><input type="text" name="privPlate" id="priv_plate" placeholder="Private Plate" value="<?php echo $getPrivPlate; ?>"></div>
 		</div>
 		</div>
 		<div class="inner">
@@ -1021,7 +1109,7 @@ function update_vehicle_form($listing_id) {
 			<div>
 				<label for="">Make</label>
 				<div>
-					<input type="text" name="vmake" id="make" value="<?php echo strtolower($getMake); ?>" readonly>
+					<input type="text" name="vmake" id="make" value="<?php echo strtolower($getMake); ?>" >
 				</div>
 			</div>
 			<div>
@@ -1040,7 +1128,7 @@ function update_vehicle_form($listing_id) {
 		<div class="inner">
 			<div>
 				<label for="">Description</label>
-				<input type="text" name="vehDes" id="veh_desc" value="<?php echo $getSecTitle; ?>">
+				<input type="text" name="vehDes" id="veh_desc" placeholder="Vehicle Short Desciption" value="<?php echo $getSecTitle; ?>">
 			</div>
 			<div>
 				<label for="">Import</label>
@@ -1778,7 +1866,7 @@ function update_vehicle($post_id) {
 		else {
 			session_start();
 			$_SESSION['vehicle-updated'] = $postTitle;
-			wp_redirect(home_url().'/vehicle');
+			wp_redirect(home_url().'/vehicles/');
 			exit();
 		}
 	}
@@ -1786,7 +1874,6 @@ function update_vehicle($post_id) {
 function vehicle_search_form() {
 	$search = '<form  method="post" action="" class="vehicle-filters">';
 	$search.= '<input type="hidden" name="search-vehicle" value="searchVahicle">';
-	$search.= '<input type="reset" value="reset">';
 	$search.= '<div class="vehicle-form-first-row">';
 	$search.= '<select name="searchMake" id="search-make">
 			   <option value=""> Make (any) </option>
@@ -1874,7 +1961,7 @@ function vehicle_search_form() {
 	$search.= '</div>';
 	$search.= '<div class="vehicle-form-last-row">';
 	$search.= '<input type=text id="search-key" placeholder="Add keyword: e.g white transit tips" name="searchKey"/>';
-	$search.= '<input type="submit" id="vehicle-submit" value="Search"/></div></form>';
+	$search.= '<input type="submit" name="vehicle-search-form" id="vehicle-submit" value="Search"/></div></form>';
 	echo $search;
 } 
 
@@ -1974,7 +2061,7 @@ function get_customers() {
     	$spNotes = get_post_meta($post_id, 'wpcf-special-notes',true);
     	echo '<tr><td>'.$firstName.'</td><td>'.$surname .'</td><td>'.$compName .'</td><td>'.$mobNo.'</td><td>'.$email.'</td><td>'.$vat.'</td></tr>';
     	echo '<tr><td class="edit_button"><a href ="'.home_url().'/edit-customer/?pid='.$post_id.'">Edit</a></td>';
-    	echo "<td class='delete_button'><a href=\"".get_delete_post_link( $post_id )."\"onclick=\"return confirm('Are you sure, you want to delete?')\">Delete</a>";
+    	echo "<td class='edit_button'><a href=\"".get_delete_post_link( $post_id )."\"onclick=\"return confirm('Are you sure, you want to delete?')\">Delete</a>";
     	echo "</td><td></td><td></td><td></td><td></td></tr>";
     endwhile;
     echo "</table>";
@@ -1989,31 +2076,32 @@ function add_customer_form() {
 	$customerForm.= '<p class="heading">Add New Customer</p>';
 	$customerForm.=	'<div class="inner">';
 	$customerForm.= '<div><label for="">First Name</label><div>';
-	$customerForm.= '<input type="text" name="firstName" value=" " placeholder="First Name"/></div></div>';
+	$customerForm.= '<input type="text" name="firstName" value="" placeholder="First Name"/></div></div>';
 	$customerForm.= '<div><label for="">Middle Name</label><div>';
-	$customerForm.= '<input type="text" name="middleName" value=" " placeholder="Middle Name"/></div></div>';
+	$customerForm.= '<input type="text" name="middleName" value="" placeholder="Middle Name"/></div></div>';
 	$customerForm.= '<div><label for="">Last Name</label><div>';
-	$customerForm.= '<input type="text" name="lastName" value=" " placeholder="First Name"/></div></div></div>';
+	$customerForm.= '<input type="text" name="lastName" value="" placeholder="Last Name"/></div></div></div>';
 	$customerForm.=	'<div class="inner">';
 	$customerForm.= '<div><label for="">Telephone Mobile</label><div>';
-	$customerForm.= '<input type="text" name="telMob" value=" " placeholder="Telephone Mobile"/></div></div>';
+	$customerForm.= '<input type="text" name="telMob" value="" placeholder="Telephone/Mobile Number "/></div></div>';
 	$customerForm.= '<div><label for="">Email</label><div>';
-	$customerForm.= '<input type="email" name="custEmail" value=" " placeholder="Email"/></div></div>';
+	$customerForm.= '<input type="email" name="custEmail" value="" placeholder="Email Address"/></div></div>';
 	$customerForm.= '<div><label for="">Vat Registration Number</label><div>';
-	$customerForm.= '<input type="text" name="vat" value=" " placeholder="Vat Registration Number"/></div></div></div>';
+	$customerForm.= '<input type="text" name="vat" value="" placeholder="Vat Registration Number"/></div></div></div>';
 	$customerForm.=	'<div class="inner">';
-	$customerForm.= '<div><label for="">Company Name</label><div>';
-	$customerForm.= '<input type="text" name="compName" value=" " placeholder="Company Name"/></div></div>';
+	$customerForm.= '<div><label for="">Company Name</label><div class="company-name">';
+	$customerForm.= '<input type="text" id="" name="compName" value="" placeholder="Company Name"/></div></div></div>';
+	$customerForm.=	'<div class="inner">';
 	$customerForm.= '<div><label for="">Address</label><div>';
-	$customerForm.= '<textarea name="address" value=" " placeholder="Address" cols="15" rows="5"></textarea></div></div>';
+	$customerForm.= '<textarea name="address" value="" placeholder="Customer Address" cols="15" rows="5"></textarea></div></div>';
 	$customerForm.= '<div><label for="">Secret Question</label><div>';
-	$customerForm.= '<textarea name="secQue" value=" " placeholder="Secret Question" cols="15" rows="5"></textarea></div></div></div>';
+	$customerForm.= '<textarea name="secQue" value="" placeholder="Secret Question" cols="15" rows="5"></textarea></div></div></div>';
 	$customerForm.=	'<div class="inner">';
 	$customerForm.= '<div><label for="">Customer Purchase History</label><div>';
-	$customerForm.= '<textarea name="custHis" value=" " placeholder="Customer Purchase History" cols="30" rows="10"></textarea></div></div>';
+	$customerForm.= '<textarea name="custHis" value="" placeholder="Customer Purchase History" cols="30" rows="10"></textarea></div></div>';
 	$customerForm.= '<div><label for="">Special Notes</label><div>';
-	$customerForm.= '<textarea name="speNotes" value=" " placeholder="Special Notes" cols="30" rows="10"></textarea></div></div></div>';
-	$customerForm.= '<input type="submit" name="submit" class="add-customer" value="Add Customer" />';
+	$customerForm.= '<textarea name="speNotes" value="" placeholder="Special Notes" cols="30" rows="10"></textarea></div></div></div>';
+	$customerForm.= '<p class="button-submit"><input type="submit" name="submit" class="add-customer" value="Add Customer" /></p>';
 	echo $customerForm;
 }
 
@@ -2109,8 +2197,9 @@ function update_customer_form( $post_id ) {
 		$customerForm.= '<div><label for="">Vat Registration Number</label><div>';
 		$customerForm.= '<input type="text" name="vat" value="' .$vat. '" placeholder="Vat Registration Number"/></div></div></div>';
 		$customerForm.=	'<div class="inner">';
-		$customerForm.= '<div><label for="">Company Name</label><div>';
-		$customerForm.= '<input type="text" name="compName" value="' .$compName. '" placeholder="Company Name"/></div></div>';
+		$customerForm.= '<div><label for="">Company Name</label><div class="company-name">';
+		$customerForm.= '<input type="text" name="compName" value="' .$compName. '" placeholder="Company Name"/></div></div></div>';
+		$customerForm.= '<div class="inner">';
 		$customerForm.= '<div><label for="">Address</label><div>';
 		$customerForm.= '<textarea name="address" placeholder="Address" cols="15" rows="5">' .$address. '</textarea></div></div>';
 		$customerForm.= '<div><label for="">Secret Question</label><div>';
@@ -2120,7 +2209,7 @@ function update_customer_form( $post_id ) {
 		$customerForm.= '<textarea name="custHis" placeholder="Customer Purchase History" cols="30" rows="10">' .$purHis. '</textarea></div></div>';
 		$customerForm.= '<div><label for="">Special Notes</label><div>';
 		$customerForm.= '<textarea name="speNotes" placeholder="Special Notes" cols="30" rows="10">' .$spNotes. '</textarea></div></div></div>';
-		$customerForm.= '<input type="submit" name="submit" class="edit-customer" value="Update Customer" />';
+		$customerForm.= '<p class="button-submit"><input type="submit" name="submit" class="edit-customer" value="Update Customer" /></p>';
 		echo $customerForm;
 		update_customer($post_id);
 	}
@@ -2173,4 +2262,27 @@ function customer_search_form() {
 	$search.= '<input type=text id="customer-search" name="searchKey"/>';
 	$search.= '<input type="submit" id="customer-submit" value="Search Customer"/></form>';
 	echo $search;
+}
+
+// Reports page functions
+
+add_action( 'wp_ajax_reportFilters', 'reportFilters' );
+add_action( 'wp_ajax_nopriv_reportFilters', 'reportFilters' );
+function reportFilters() {
+	if (! isset( $_POST['reports_nonce_field'] )|| ! wp_verify_nonce( $_POST['reports_nonce_field'], 'reports_action_nonce')) {
+        exit('The form is not valid');
+    }
+    // Example for creating an response with error information, to know in our js file
+    // about the error and behave accordingly, like adding error message to the form with JS
+    if (trim($_POST['email']) == '') {
+    	$response['error'] = true;
+    	$response['error_message'] = 'Email is required';
+ 
+    	// Exit here, for not processing further because of the error
+    	exit(json_encode($response));
+    }
+    $response['name'] = $_POST['name'];
+    $response['email'] = $_POST['email'];
+    // Don't forget to exit at the end of processing
+    exit(json_encode($response));
 }
