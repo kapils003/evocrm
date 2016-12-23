@@ -21,11 +21,15 @@
 
 				<?php wp_link_pages( array('before' => '<p class="margin-top-20">' . __( 'Pages:' ), 'after' => '</p>') ); ?>          
                 <?php
-                wp_reset_postdata();
-                dvla_api_form(); 
-                dvla_data_save();
-                get_vahicles();
-                dvla_api_errors();
+	                wp_reset_postdata();
+	                dvla_api_form(); 
+	                dvla_api_errors();
+	                dvla_data_save();
+	                get_vahicles();
+	                /*$post_id = $_GET['deleteVehicle'];
+    				if(isset($post_id)) {
+	                	deleteVehicleButton($post_id);
+	            	}*/
                 ?>
         	</div>
             <?php // sidebar 

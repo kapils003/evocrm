@@ -53,583 +53,583 @@ function dvla_vehicle_form($result, $licenceplate) {
 	$motDetails = strtotime(substr($result->motDetails,8));
 	$motDate = date("m/d/Y",$motDetails);
 	?>
-<form method="post" class="add-vehicle-form" action="<?php echo home_url().'/vehicles/'; ?> ">
-	<input type="hidden" name="vehicle-hidden" value="vehicles">
-	<div class="vehicle-details">
-		<p class="heading">Vechile Details-Stock Information</p>
-		<div class="inner">
-			<div>
-				<label for="">Stock</label>
-				<div>(New - will be assign)</div>
-			</div>
-		<div>
-			<label for="">Reg No.</label>
-			<div><input type="text" name="regNo" value="<?php echo $licenceplate; ?>" placeholder="123aasf"/></div>
-		</div>
-		<div class="reg-letter">
-			<label for="">Reg Letter</label>
-			<div class="select-style">
-				<select name="regLetter" id="reg_letter">
-					<option value="s">S</option>
-					<option value="f">F</option>
-					<option value="v">v</option>
-					<option value="h">H</option>
-					<option value="g">G</option>
-				</select>
-				<span></span>
-			</div>
-		</div>
-		<div>
-			<label for="">Reg Date</label>
-			<div>
-				<input type="text" id="date_1" class="datepick" name="regDate" value="<?php echo $reg_date; ?>"></div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Priv Plate</label>
+	<form method="post" class="add-vehicle-form" action="<?php echo home_url().'/vehicles/'; ?> ">
+		<input type="hidden" name="vehicle-hidden" value="vehicles">
+		<div class="vehicle-details">
+			<p class="heading">Vechile Details-Stock Information</p>
+			<div class="inner">
 				<div>
-					<input type="text" name="privPlate" placeholder="Private Plate" id="priv_plate">
+					<label for="">Stock</label>
+					<div>(New - will be assign)</div>
 				</div>
-			</div>
 			<div>
-				<label for="">Sale type</label>
+				<label for="">Reg No.</label>
+				<div><input type="text" name="regNo" value="<?php echo $licenceplate; ?>" placeholder="123aasf"/></div>
+			</div>
+			<div class="reg-letter">
+				<label for="">Reg Letter</label>
 				<div class="select-style">
-					<select name="saleType" id="sale_type">
-						<option value="">Van-used</option>
-						<option value="">Van not used</option>
+					<select name="regLetter" id="reg_letter">
+						<option value="s">S</option>
+						<option value="f">F</option>
+						<option value="v">v</option>
+						<option value="h">H</option>
+						<option value="g">G</option>
 					</select>
 					<span></span>
 				</div>
 			</div>
 			<div>
-				<label for="">Vat type</label>
-				<div class="select-style">
-					<select name="vatType" id="vat_type">
-						<option value="">Commercial</option>
-						<option value="">illigal</option>
-					</select>
-				</div>
-			</div>
-			<div>
-				<label for="">Retail Price</label>
-				<div><input type="text" name="retailPrice" id="retail_price" value="" placeholder="Enter Vehicle Price"></div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Make</label>
+				<label for="">Reg Date</label>
 				<div>
-					<input type="text" name="vmake" id="make" value="<?php echo strtolower($result->make); ?>" readonly>
+					<input type="text" id="date_1" class="datepick" name="regDate" value="<?php echo $reg_date; ?>"></div>
 				</div>
 			</div>
-			<div>
-				<label for="">Model</label>
+			<div class="inner">
 				<div>
-					<input type="text" name="vmodel" id="model" value="<?php echo strtolower($result->model); ?>">
+					<label for="">Priv Plate</label>
+					<div>
+						<input type="text" name="privPlate" placeholder="Private Plate" id="priv_plate">
+					</div>
 				</div>
-			</div>
-			<div>
-				<label for="">Year</label>
 				<div>
-					<input type="text" name="vyear" id="year" value="<?php echo $result->yearOfManufacture; ?>">
-				</div>
-			</div>
-			<div>
-				<label for="">Description</label>
-				<input type="text" name="vehDes" placeholder="Vehicle Short Description" id="veh_desc" value="">
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Import</label>
-				<div class="select-style">
-					<select name="import" id="import">
-						<option value="">Yes</option>
-						<option value="">No</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Hide Finance</label>
-				<div><input type="checkbox" name="hideFinance" id="hide_finance" value="1">Hide finance on website</div>
-			</div>
-			<div>
-				<label for="">VIN/Chassis No.</label>
-				<div><input type="text" name="vin" id="vin" value="<?php echo $result->vin; ?>"></div>
-			</div>
-			<div>
-				<label for="">Engine No.</label>
-				<div><input type="text" name="engineNo" id="engine_no" value="sdlkja"></div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Advert Mileage</label>
-				<div><input type="text" placeholder="Advert Mileage" name="advertMileage"></div>
-			</div>
-			<div>
-				<label for="">Actual Mileage</label>
-				<div><input name="actualMileage" placeholder="Actual Mileage" id="actual_mileage" type="text"></div>
-			</div>
-			<div>
-				<label for="">Ins Group</label>
-				<div class="select-style">
-					<select name="insGroup" id="ins_group">
-						<option value="">34</option>
-						<option value="">32</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Colour</label>
-				<div class="select-style">
-					<select name="colour" id="colour">
-					<?php 
-						$colours = array('Silver','Red','Green','Black','White','Grey');
-						foreach ($colours as $colour) {
-							$colour  = strtolower($colour);
-							$result_colour = strtolower($result->colour);
-							?>
-							<option value="<?php echo $colour; ?>" <?php if( ($result_colour) && !empty($result_colour) ) selected($result_colour, $colour); ?>><?php echo esc_attr($colour); ?></option>
-					<?php } ?>
-					</select>
-					<span></span>
-				</div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Former Oweners (view)</label>
-				<div class="select-style">
-					<select name="formerOwner" id="">
-						<option value="">1</option>
-						<option value="">2</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Status</label>
-				<div class="select-style">
-					<select name="status" id="status">
-						<option value="due in 7 days">Due in 7 days</option>
-						<option value="due in 14 days">Due in 14 days</option>
-						<option value="due in 21 days">Due in 21 days</option>
-						<option value="due in 28 days">Due in 21 days</option>
-						<option value="on hire">On hire</option>
-						<option value="in stock s2">In Stock S2</option>
-						<option value="in stock s3">In Stock S3</option>
-						<option value="in stock">In Stock</option>
-						<option value="in transit">In Transit</option>
-						<option value="ordered">Ordered</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Grading</label>
-				<div class="select-style">
-					<select name="grading" id="grading">
-						<option value="">Select</option>
-						<option value="">One</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Key Tag</label>
-				<div class="select-style">
-					<select name="keyTag" id="key_tag">
-						<option value="">--</option>
-						<option value=""></option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Location</label>
-				<div class="select-style">
-					<select name="location" id="location">
-						<option value="">Location 1</option>
-						<option value=""></option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Current MOT Date</label>
-				<div><input type="text" id="date_2" class="datepick" name="motDate1" value="30/09/2011"></div>
-			</div>
-			<div>
-				<label for="">MOT Number</label>
-				<div><input type="text" name="motNumber" value="<?php echo $result->mot; ?>"></div>
-			</div>
-			<div>
-				<label for="">Next MOT Date</label>
-				<div><input type="text" id="date_3" class="datepick" name="motDate2" value="<?php echo $motDate; ?>"></div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Motability</label>
-				<div class="select-style">
-					<select name="motability" id="motability">
-						<option value="">NO</option>
-						<option value="">YES</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Radio code</label>
-				<div><input type="text" placeholder="Radio code" name="radioCode" id="radio_code"></div>
-			</div>
-			<div>
-				<label for="">Alarm code</label>
-				<div><input type="text" placeholder="Alarm code" name="alarmCode" id="alarm_code"></div>
-			</div>
-			<div>
-				<label for="">Ig Key No</label>
-				<div><input type="text" placeholder="Ig key no" name="igKey" id="ig_key"></div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Door Key No</label>
-				<div><input type="text" placeholder="Door key no" name="doorKey" id="door_key"></div>
-			</div>
-			<div>
-				<label for="">Spare Keys</label>
-				<div><input type="checkbox" placeholder="Spare keys" name="spareKey" id="spare_keys" value="1"></div>
-			</div>
-			<div>
-				<label for="">V5</label>
-				<div class="select-style">
-					<select name="v5" id="v5">
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">V5 Number</label>
-				<div><input type="text" placeholder="V5 number" name="v5No" id="v5_no"></div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Tax</label>
-				<div class="select-style">
-					<select name="tax" id="tax">
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">HPI</label>
-				<div class="select-style">
-					<select name="hpi" id="hpi">
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Mileage Check</label>
-				<div class="select-style">
-					<select name="mileageCheck" id="mileage_check">
-						<option value="checked">Checked</option>
-						<option value="not checked">Not Checked</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Service Check</label>
-				<div class="select-style">
-					<select name="serviceCheck" id="service_check">
-						<option value="cheked">Checked</option>
-						<option value="not checked">Not Checked</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Purchase date</label>
-				<div><input type="text" placeholder="Purchase date" name="purchaseDate" id="date_4" class="datepick" value="09/07/2011"></div>
-			</div>
-			<div>
-				<label for="">Dealer PI ref</label>
-				<div><a href="">Save vechile first</a></div>
-			</div>
-			<div>
-				<label for="">Part-ex ref</label>
-				<div></div>
-			</div>
-			<div>
-				<label for="">Purchase price</label>
-				<div><input type="text" placeholder="Purchase price" name="purchasePrice" id="purchase_price"></div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Supplier Inv No</label>
-				<div><input type="text" placeholder="Supplier invoice number" name="supplierInvNo" id="supplier_inv_no"></div>
-			</div>
-			<div>
-				<label for="">Source</label>
-				<div class="select-style">
-					<select name="source" id="source">
-						<option value="">Trade</option>
-						<option value=""></option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Supplier</label>
-				<div class="select-style">
-					<select name="supplier" id="supplier">
-						<option value=""> --Choose-- </option>
-						<?php
-						$suppliers = array('Full Dealer + Other','Full Dealer','Full Non Dealer','None','Part Dealer','Part Dealer + Other','Part Non Dealer');
-						foreach ($suppliers as $supplier) {
-							$result_supplier;
-							?>
-							<option value="<?php echo $supplier; ?>" <?php if( ($result_supplier) && !empty($result_supplier) ) selected($result_supplier, $supplier); ?>><?php echo esc_attr($supplier); ?></option>
-						<?php } ?>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Buyer</label>
-				<div class="select-style">
-					<select name="buyer" id="buyer">
-						<option value="">--Choose--</option>
-						<option value=""></option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Hide on Web</label>
-				<div>
-					<input type="checkbox" name="hideWeb" value="1">
-				</div>
-			</div>
-			<div>
-				<label for="">Sale or return</label>
-				<div class="select-style">
-					<select name="saleOrReturn" id="sale_or_return">
-						<option value="">Yes</option>
-						<option value=""></option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Supplier details</label>
-				<div>no trade</div>
-			</div>
-			<div>
-				<label for="">Stock comments</label>
-				<div><textarea name="stockComments" placeholder="Stock comments" id="stock_comments" cols="30" rows="10"></textarea></div>
-			</div>
-		</div>
-	</div>
-	<div class="vehicle-details">
-	<p class="heading">Vechile Details-Details</p>
-		<div class="inner">
-			<div>
-				<label for="">History</label>
-				<div class="select-style">
-					<select name="history" id="history">
-						<option value="">--Choose--</option>
-						<option value=""></option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="check">FSH</label>
-				<div><input type="checkbox" name="fsh" id="check" value="1"></div>
-			</div>
-			<div>
-				<label for="">VAN</label>
-				<div><button>Click Here</button></div>
-			</div>
-			<div>
-				<label for="">BHP</label>
-				<div><input type="text" name="bhp" placeholder="BHP" id="bhp" value=""></div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Warrenty</label>
-				<div class="select-style">
-					<select name="warrenty" id="warrenty">
-						<option value="">none</option>
-						<option value="balance of dealers">Balance of Dealers</option>
-						<option value="balance of makers">Balance of Makers</option>
-						<option value="3 months">3 Months</option>
-						<option value="6 months">6 Months</option>
-						<option value="12 months">12 Months</option>
-						<option value="24 months">24 Months</option>
-						<option value="36 months">36 Months</option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Engine size</label>
-				<div><input type="text" name="engineSize" placeholder="Engine size" id="engine_size" value="<?php echo $result->cylinderCapacity.' /'.$result->co2Emissions ; ?>"></div>
-			</div>
-			<div>
-				<label for="">Fuel type</label>
-				<div class="select-style">
-					<select name="fuelType" id="fuel_type">
-					<?php 
-					$fuelTypes = array('Diesel','Petrol');
-					foreach ($fuelTypes as $fuelType) {
-						$fuelType  = strtolower($fuelType);
-						$result_fuel = strtolower($result->fuelType);
-						?>
-						<option value="<?php echo $fuelType; ?>" <?php if( ($result_fuel) && !empty($result_fuel) ) selected($result_fuel, $fuelType); ?>><?php echo esc_attr($fuelType); ?></option>
-					<?php } ?>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Engine type</label>
-				<div class="select-style">
-					<select name="engineType" id="engine_type">
-						<option value="">--choose--</option>
-						<option value=""></option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Transmission</label>
-				<div class="select-style">
-					<select name="vtransmission" id="transmission">
-					<?php 
-					$transmissions = array('Automatic','Manual');
-					foreach ($transmissions as $transmission) { 
-						$transmission  = strtolower($transmission);
-						$result_trans = strtolower($result->transmission);
-						?>
-						<option value="<?php echo $transmission; ?>" <?php if( ($result_trans) && !empty($result_trans) ) selected($result_trans, $transmission); ?>><?php echo esc_attr($transmission); ?></option>
-					<?php } ?>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Gears</label>
-				<div class="select-style">
-					<select name="gears" id="gears">
-						<option value="">6</option>
-						<option value=""></option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Drive</label>
-				<div class="select-style">
-					<select name="drive" id="drive">
-						<option value=""> --Choose-- </option>
-						<?php
-						$drives = array('FWD','RWD','4WD');
-						foreach ($drives as $drive) {
-							$result_drive;
-							?>
-							<option value="<?php echo $drive; ?>" <?php if( ($result_drive) && !empty($result_drive) ) selected($result_drive, $drive); ?>><?php echo esc_attr($drive); ?></option>
-						<?php } ?>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Body type</label>
-				<div class="select-style">
-					<select name="bodyType" id="body_type">
-						<option value="">Couple</option>
-						<option value=""></option>
-					</select>
-					<span></span>
-				</div>
-			</div>
-		</div>
-		<div class="inner">
-			<div>
-				<label for="">Doors</label>
-				<div class="select-style">
-					<select name="doors" id="doors">
-					<?php 
-					$doors = array('1','2','3','4','5','6');
-					foreach ($doors as $door) { ?>
-						<option value="<?php echo $door; ?>" <?php if( ($result->numberOfDoors) && !empty($result->numberOfDoors) ) selected($result->numberOfDoors, $door); ?>><?php echo esc_attr($door); ?></option>
-					<?php } ?>
-					</select>
-					<span></span>
-				</div>
-			</div>
-			<div>
-				<label for="">Group</label>
-				<div>(+3)</div>
-			</div>
-			<div>
-				<label for="">Trim type</label>
-				<div class="select-style">
-					<select name="trimType" id="trim_type">
-						<option value="">--choose--</option>
-						<option value=""></option>
+					<label for="">Sale type</label>
+					<div class="select-style">
+						<select name="saleType" id="sale_type">
+							<option value="">Van-used</option>
+							<option value="">Van not used</option>
+						</select>
 						<span></span>
-					</select>
+					</div>
+				</div>
+				<div>
+					<label for="">Vat type</label>
+					<div class="select-style">
+						<select name="vatType" id="vat_type">
+							<option value="">Commercial</option>
+							<option value="">illigal</option>
+						</select>
+					</div>
+				</div>
+				<div>
+					<label for="">Retail Price</label>
+					<div><input type="text" name="retailPrice" id="retail_price" value="" placeholder="Enter Vehicle Price"></div>
 				</div>
 			</div>
-			<div>
-				<label for="">Trim Colour</label>
-				<div class="select-style">
-					<select name="trimColour" id="trim_colour">
-						<option value="">--choose--</option>
-						<option value=""></option>
-					</select>
-					<span></span>
+			<div class="inner">
+				<div>
+					<label for="">Make</label>
+					<div>
+						<input type="text" name="vmake" id="make" value="<?php echo strtolower($result->make); ?>" readonly>
+					</div>
+				</div>
+				<div>
+					<label for="">Model</label>
+					<div>
+						<input type="text" name="vmodel" id="model" value="<?php echo strtolower($result->model); ?>">
+					</div>
+				</div>
+				<div>
+					<label for="">Year</label>
+					<div>
+						<input type="text" name="vyear" id="year" value="<?php echo $result->yearOfManufacture; ?>">
+					</div>
+				</div>
+				<div>
+					<label for="">Description</label>
+					<input type="text" name="vehDes" placeholder="Vehicle Short Description" id="veh_desc" value="">
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Import</label>
+					<div class="select-style">
+						<select name="import" id="import">
+							<option value="">Yes</option>
+							<option value="">No</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Hide Finance</label>
+					<div><input type="checkbox" name="hideFinance" id="hide_finance" value="1">Hide finance on website</div>
+				</div>
+				<div>
+					<label for="">VIN/Chassis No.</label>
+					<div><input type="text" name="vin" id="vin" value="<?php echo $result->vin; ?>"></div>
+				</div>
+				<div>
+					<label for="">Engine No.</label>
+					<div><input type="text" name="engineNo" id="engine_no" value="sdlkja"></div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Advert Mileage</label>
+					<div><input type="text" placeholder="Advert Mileage" name="advertMileage"></div>
+				</div>
+				<div>
+					<label for="">Actual Mileage</label>
+					<div><input name="actualMileage" placeholder="Actual Mileage" id="actual_mileage" type="text"></div>
+				</div>
+				<div>
+					<label for="">Ins Group</label>
+					<div class="select-style">
+						<select name="insGroup" id="ins_group">
+							<option value="">34</option>
+							<option value="">32</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Colour</label>
+					<div class="select-style">
+						<select name="colour" id="colour">
+						<?php 
+							$colours = array('Silver','Red','Green','Black','White','Grey');
+							foreach ($colours as $colour) {
+								$colour  = strtolower($colour);
+								$result_colour = strtolower($result->colour);
+								?>
+								<option value="<?php echo $colour; ?>" <?php if( ($result_colour) && !empty($result_colour) ) selected($result_colour, $colour); ?>><?php echo esc_attr($colour); ?></option>
+						<?php } ?>
+						</select>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Former Oweners (view)</label>
+					<div class="select-style">
+						<select name="formerOwner" id="">
+							<option value="">1</option>
+							<option value="">2</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Status</label>
+					<div class="select-style">
+						<select name="status" id="status">
+							<option value="due in 7 days">Due in 7 days</option>
+							<option value="due in 14 days">Due in 14 days</option>
+							<option value="due in 21 days">Due in 21 days</option>
+							<option value="due in 28 days">Due in 21 days</option>
+							<option value="on hire">On hire</option>
+							<option value="in stock s2">In Stock S2</option>
+							<option value="in stock s3">In Stock S3</option>
+							<option value="in stock">In Stock</option>
+							<option value="in transit">In Transit</option>
+							<option value="ordered">Ordered</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Grading</label>
+					<div class="select-style">
+						<select name="grading" id="grading">
+							<option value="">Select</option>
+							<option value="">One</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Key Tag</label>
+					<div class="select-style">
+						<select name="keyTag" id="key_tag">
+							<option value="">--</option>
+							<option value=""></option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Location</label>
+					<div class="select-style">
+						<select name="location" id="location">
+							<option value="">Location 1</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Current MOT Date</label>
+					<div><input type="text" id="date_2" class="datepick" name="motDate1" value="30/09/2011"></div>
+				</div>
+				<div>
+					<label for="">MOT Number</label>
+					<div><input type="text" name="motNumber" value="<?php echo $result->mot; ?>"></div>
+				</div>
+				<div>
+					<label for="">Next MOT Date</label>
+					<div><input type="text" id="date_3" class="datepick" name="motDate2" value="<?php echo $motDate; ?>"></div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Motability</label>
+					<div class="select-style">
+						<select name="motability" id="motability">
+							<option value="">NO</option>
+							<option value="">YES</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Radio code</label>
+					<div><input type="text" placeholder="Radio code" name="radioCode" id="radio_code"></div>
+				</div>
+				<div>
+					<label for="">Alarm code</label>
+					<div><input type="text" placeholder="Alarm code" name="alarmCode" id="alarm_code"></div>
+				</div>
+				<div>
+					<label for="">Ig Key No</label>
+					<div><input type="text" placeholder="Ig key no" name="igKey" id="ig_key"></div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Door Key No</label>
+					<div><input type="text" placeholder="Door key no" name="doorKey" id="door_key"></div>
+				</div>
+				<div>
+					<label for="">Spare Keys</label>
+					<div><input type="checkbox" placeholder="Spare keys" name="spareKey" id="spare_keys" value="1"></div>
+				</div>
+				<div>
+					<label for="">V5</label>
+					<div class="select-style">
+						<select name="v5" id="v5">
+							<option value="yes">Yes</option>
+							<option value="no">No</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">V5 Number</label>
+					<div><input type="text" placeholder="V5 number" name="v5No" id="v5_no"></div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Tax</label>
+					<div class="select-style">
+						<select name="tax" id="tax">
+							<option value="yes">Yes</option>
+							<option value="no">No</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">HPI</label>
+					<div class="select-style">
+						<select name="hpi" id="hpi">
+							<option value="yes">Yes</option>
+							<option value="no">No</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Mileage Check</label>
+					<div class="select-style">
+						<select name="mileageCheck" id="mileage_check">
+							<option value="checked">Checked</option>
+							<option value="not checked">Not Checked</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Service Check</label>
+					<div class="select-style">
+						<select name="serviceCheck" id="service_check">
+							<option value="cheked">Checked</option>
+							<option value="not checked">Not Checked</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Purchase date</label>
+					<div><input type="text" placeholder="Purchase date" name="purchaseDate" id="date_4" class="datepick" value="09/07/2011"></div>
+				</div>
+				<div>
+					<label for="">Dealer PI ref</label>
+					<div><a href="">Save vechile first</a></div>
+				</div>
+				<div>
+					<label for="">Part-ex ref</label>
+					<div></div>
+				</div>
+				<div>
+					<label for="">Purchase price</label>
+					<div><input type="text" placeholder="Purchase price" name="purchasePrice" id="purchase_price"></div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Supplier Inv No</label>
+					<div><input type="text" placeholder="Supplier invoice number" name="supplierInvNo" id="supplier_inv_no"></div>
+				</div>
+				<div>
+					<label for="">Source</label>
+					<div class="select-style">
+						<select name="source" id="source">
+							<option value="">Trade</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Supplier</label>
+					<div class="select-style">
+						<select name="supplier" id="supplier">
+							<option value=""> --Choose-- </option>
+							<?php
+							$suppliers = array('Full Dealer + Other','Full Dealer','Full Non Dealer','None','Part Dealer','Part Dealer + Other','Part Non Dealer');
+							foreach ($suppliers as $supplier) {
+								$result_supplier;
+								?>
+								<option value="<?php echo $supplier; ?>" <?php if( ($result_supplier) && !empty($result_supplier) ) selected($result_supplier, $supplier); ?>><?php echo esc_attr($supplier); ?></option>
+							<?php } ?>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Buyer</label>
+					<div class="select-style">
+						<select name="buyer" id="buyer">
+							<option value="">--Choose--</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Hide on Web</label>
+					<div>
+						<input type="checkbox" name="hideWeb" value="1">
+					</div>
+				</div>
+				<div>
+					<label for="">Sale or return</label>
+					<div class="select-style">
+						<select name="saleOrReturn" id="sale_or_return">
+							<option value="">Yes</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Supplier details</label>
+					<div>no trade</div>
+				</div>
+				<div>
+					<label for="">Stock comments</label>
+					<div><textarea name="stockComments" placeholder="Stock comments" id="stock_comments" cols="30" rows="10"></textarea></div>
 				</div>
 			</div>
 		</div>
-		<div class="inner">
-			<div>
-				<label for="">YouTube ID</label>
-				<div><input name="youtube_id" placeholder="Youtube ID" id="youtube_id" type="text"></div>
+		<div class="vehicle-details">
+		<p class="heading">Vechile Details-Details</p>
+			<div class="inner">
+				<div>
+					<label for="">History</label>
+					<div class="select-style">
+						<select name="history" id="history">
+							<option value="">--Choose--</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="check">FSH</label>
+					<div><input type="checkbox" name="fsh" id="check" value="1"></div>
+				</div>
+				<div>
+					<label for="">VAN</label>
+					<div><button>Click Here</button></div>
+				</div>
+				<div>
+					<label for="">BHP</label>
+					<div><input type="text" name="bhp" placeholder="BHP" id="bhp" value=""></div>
+				</div>
 			</div>
-			<div>
-				<label for="">Service Comments</label>
-				<div><textarea name="serviceComments" placeholder="Service comments" id="service_comments" cols="30" rows="10"></textarea></div>
+			<div class="inner">
+				<div>
+					<label for="">Warrenty</label>
+					<div class="select-style">
+						<select name="warrenty" id="warrenty">
+							<option value="">none</option>
+							<option value="balance of dealers">Balance of Dealers</option>
+							<option value="balance of makers">Balance of Makers</option>
+							<option value="3 months">3 Months</option>
+							<option value="6 months">6 Months</option>
+							<option value="12 months">12 Months</option>
+							<option value="24 months">24 Months</option>
+							<option value="36 months">36 Months</option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Engine size</label>
+					<div><input type="text" name="engineSize" placeholder="Engine size" id="engine_size" value="<?php echo $result->cylinderCapacity.' /'.$result->co2Emissions ; ?>"></div>
+				</div>
+				<div>
+					<label for="">Fuel type</label>
+					<div class="select-style">
+						<select name="fuelType" id="fuel_type">
+						<?php 
+						$fuelTypes = array('Diesel','Petrol');
+						foreach ($fuelTypes as $fuelType) {
+							$fuelType  = strtolower($fuelType);
+							$result_fuel = strtolower($result->fuelType);
+							?>
+							<option value="<?php echo $fuelType; ?>" <?php if( ($result_fuel) && !empty($result_fuel) ) selected($result_fuel, $fuelType); ?>><?php echo esc_attr($fuelType); ?></option>
+						<?php } ?>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Engine type</label>
+					<div class="select-style">
+						<select name="engineType" id="engine_type">
+							<option value="">--choose--</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Transmission</label>
+					<div class="select-style">
+						<select name="vtransmission" id="transmission">
+						<?php 
+						$transmissions = array('Automatic','Manual');
+						foreach ($transmissions as $transmission) { 
+							$transmission  = strtolower($transmission);
+							$result_trans = strtolower($result->transmission);
+							?>
+							<option value="<?php echo $transmission; ?>" <?php if( ($result_trans) && !empty($result_trans) ) selected($result_trans, $transmission); ?>><?php echo esc_attr($transmission); ?></option>
+						<?php } ?>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Gears</label>
+					<div class="select-style">
+						<select name="gears" id="gears">
+							<option value="">6</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Drive</label>
+					<div class="select-style">
+						<select name="drive" id="drive">
+							<option value=""> --Choose-- </option>
+							<?php
+							$drives = array('FWD','RWD','4WD');
+							foreach ($drives as $drive) {
+								$result_drive;
+								?>
+								<option value="<?php echo $drive; ?>" <?php if( ($result_drive) && !empty($result_drive) ) selected($result_drive, $drive); ?>><?php echo esc_attr($drive); ?></option>
+							<?php } ?>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Body type</label>
+					<div class="select-style">
+						<select name="bodyType" id="body_type">
+							<option value="">Couple</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">Doors</label>
+					<div class="select-style">
+						<select name="doors" id="doors">
+						<?php 
+						$doors = array('1','2','3','4','5','6');
+						foreach ($doors as $door) { ?>
+							<option value="<?php echo $door; ?>" <?php if( ($result->numberOfDoors) && !empty($result->numberOfDoors) ) selected($result->numberOfDoors, $door); ?>><?php echo esc_attr($door); ?></option>
+						<?php } ?>
+						</select>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					<label for="">Group</label>
+					<div>(+3)</div>
+				</div>
+				<div>
+					<label for="">Trim type</label>
+					<div class="select-style">
+						<select name="trimType" id="trim_type">
+							<option value="">--choose--</option>
+							<option value=""></option>
+							<span></span>
+						</select>
+					</div>
+				</div>
+				<div>
+					<label for="">Trim Colour</label>
+					<div class="select-style">
+						<select name="trimColour" id="trim_colour">
+							<option value="">--choose--</option>
+							<option value=""></option>
+						</select>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div>
+					<label for="">YouTube ID</label>
+					<div><input name="youtube_id" placeholder="Youtube ID" id="youtube_id" type="text"></div>
+				</div>
+				<div>
+					<label for="">Service Comments</label>
+					<div><textarea name="serviceComments" placeholder="Service comments" id="service_comments" cols="30" rows="10"></textarea></div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<p class="add-vehicle-button"><input type="submit" name="submit" class="button-primary" value="Add Vehicle" /></p>
-</form>
+		<p class="add-vehicle-button"><input type="submit" name="submit" class="button-primary" value="Add Vehicle" /></p>
+	</form>
 <?php 
 }
 function dvla_data_save() {
@@ -795,9 +795,10 @@ function dvla_data_save() {
 		}
 	}
 }
-function get_vahicles() {
+function get_vahicles() { 
 	vehicle_search_form();
 	if(isset($_POST['search-vehicle'])) {
+
 		if ( (isset($_POST['searchMake'])) && !empty($_POST['searchMake']) ) {
 		   $meta[] = array(
 		    'key' => 'make',
@@ -899,7 +900,6 @@ function get_vahicles() {
 	else {
 		//echo '<div class="post_count">'.$wp_query->post_count.'</div>';
 	}
-    //echo '<table class="customer-details"><th>Vehicle Image</th><th>Reg Number</th><th>Make</th><th>Model</th><th>Colour</th><th>Price</th><th>Mileage</th>';
     echo '<div class="search-listing">';
     while ($wp_query->have_posts()) : $wp_query->the_post();
         $post_id = get_the_ID();
@@ -920,19 +920,18 @@ function get_vahicles() {
     	echo '<div class="row-wrapper">';
     	echo '<div class="col-one">
             	<div class="reg">
-	                <label> Rag Number</label>
 	                <span>'.$regNo.'</span>
-            	</div>
-            	<div class="make">
-	                <label> Make</label>
-	                <span>'.$make.'</span>
-            	</div>
-            	<div class="model">
-	                <label> Model</label>
-	                <span>'.$model.'</span>
-            	</div>    
+            	</div>   
         	</div>
         	<div class="col-two">
+        	<div class="make">
+                <label> Make</label>
+                <span>'.$make.'</span>
+        	</div>
+        	<div class="model">
+                <label> Model</label>
+                <span>'.$model.'</span>
+        	</div> 
             <div class="color">
                 <label> Colour</label>
                 <span>'.$colour.'</span>
@@ -946,20 +945,32 @@ function get_vahicles() {
                 <span>'.$mileage.'</span>
             </div>    
 	        </div>
-	        <div class="button-action">    
+			</div>
+			<div class="button-action"> 
+	        	<div class="view-button"><a href ="'.home_url().'/view-vehicle/?pid='.$post_id.'">View</a></div>   
 	            <div class="edit-button"><a href ="'.home_url().'/edit-vehicle/?pid='.$post_id.'">Edit</a></div>
 	            <div class="gallery-button"><a href ="'.home_url().'/vehicle-gallery/?pid='.$post_id.'">Add Gallery</a></div>
-	            <div class="delete-button"><a href=\''.get_delete_post_link( $post_id ).'\'onclick=\'return confirm("Are you sure, you want to delete?")\'>Delete</a></div>
+	        	<a href="#" class="button-delete" data-href="'.get_delete_post_link( $post_id ).'" data-toggle="modal" data-target="#confirm-delete">Delete</a>
 	        </div> 
+	        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-body">
+			               <p>Are you sure you want to delete this vehicle?</p>
+			            </div>
+			            <div class="modal-footer">
+			                <a class="btn btn-danger btn-ok">Delete</a>
+			            	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			            </div>
+			        </div>
+			    </div>
 	        </div>   
     		</div>';
     endwhile;
-    /*echo "</table>";*/
-    next_posts_link('next');
-    previous_posts_link('previous');
+    wp_pagenavi();
     wp_reset_query();
 }
-function update_vehicle_form($listing_id) { 
+function update_vehicle_form($listing_id, $type) { 
 	$regNo = get_the_title($listing_id);
 	$getMake = get_post_meta($listing_id, 'make', true);
 	$getModel = get_post_meta($listing_id, 'model', true);
@@ -992,7 +1003,7 @@ function update_vehicle_form($listing_id) {
 	$getKeyTag = get_post_meta($listing_id, 'key-tag', true);
 	$getLocation = get_post_meta($listing_id, 'location', true);
 	$getMD1 = get_post_meta($listing_id, 'mot-date1', true);
-	$getMN = get_post_meta($listing_id, 'mot-umber', true);
+	$getMN = get_post_meta($listing_id, 'mot-number', true);
 	$getMD2 = get_post_meta($listing_id, 'mot-date2', true);
 	$getMotability = get_post_meta($listing_id, 'motability', true);
 	$getRadioCode = get_post_meta($listing_id, 'radio-code', true);
@@ -1029,6 +1040,10 @@ function update_vehicle_form($listing_id) {
 	$getFinance = get_post_meta($listing_id, 'hide-finance', true);
 	$getWeb = get_post_meta($listing_id, 'hide-web', true);
 	$getComments = get_post_meta($listing_id, 'service-comments', true);
+	$vehicleKeys = array('reg-no', 'make', 'model', 'year', 'body', 'mileage' , 'advert-mileage', 'transmission', 'condition', 'price', 'drive-train', 'engine', 'exterior-color', 'interior-color', 'vin-number', 'secondary_title', 'car_sold', 'stock-number', 'reg-letter', 'reg-date', 'priv-plate', 'sale-type', 'vat-type', 'import', 'engine-number', 'engine-type', 'ins-group', 'former-owner', 'grading', 'key-tag', 'location', 'mot-date1', 'mot-number', 'mot-date2', 'motability', 'radio-code', 'alarm-code', 'ig-key', 'door-key', 'spare-key', 'v5', 'v5-no', 'vehicle-tax', 'purchase-price', 'hpi', 'mileage-check', 'service-check', 'purchase-date', 'supplier-inv-no', 'source', 'supplier', 'buyer', 'sale-return', 'stock-comments', 'history', 'fsh', 'bhp', 'warrenty', 'engine-size', 'fuel-type', 'gears', 'doors', 'trim-type', 'trim-colour', 'status', 'youtube-id', 'hide-finance', 'hide-web', 'service-comments');
+	$vehicleValues = array($regNo, $getMake, $getModel, $getYear, $getBody, $getMileage, $getAM, $getTransmission, $getCondition, $getPrice, $getDrive, $getEngine, $getExtColour, $getIntColour, $getVin, $getSecTitle, $getCarSold, $getStock, $getregLetter, $getRegDate, $getPrivPlate, $getSaleType, $getVatType, $getImport, $getEngineNumber, $getET, $getInsGroup, $getFormerOwner, $getGrading, $getKeyTag, $getLocation, $getMD1, $getMN, $getMD2, $getMotability, $getRadioCode, $getAlarmCode, $getIK, $getDK, $getSpareKey, $getv5, $getv5No, $getTax, $getPP, $gethpi, $getMileageCheck, $getServiceCheck, $getPD, $getSIN, $getSource, $getSupplier, $getBuyer, $getSR, $getSC, $getHistory, $getfsh, $getbhp, $getWarrenty, $getES, $getFT, $getGears, $getDoors, $getTT, $getTC, $getStatus, $getYT, $getFinance, $getWeb, $getComments);
+	$vehicleDetails = array_combine($vehicleKeys, $vehicleValues);
+	if ($type == 'edit') {
 	?>
 	<form method="post" class="add-vehicle-form">
 	<input type="hidden" name="edit-vehicle" value="editVehicle">
@@ -1719,7 +1734,13 @@ function update_vehicle_form($listing_id) {
 	</div>
 	<p class="edit-vehicle-button"><input type="submit" name="submit" class="button-primary" value="Update Vehicle" /></p>
 </form>
-<?php update_vehicle($listing_id); }
+<?php
+ update_vehicle($listing_id); 
+}elseif($type == 'view') {
+	return $vehicleDetails;
+}
+	
+}
 function update_vehicle($post_id) {
 	if(isset($_POST['edit-vehicle'])){
 		$postTitle = $_POST['regNo'];
@@ -1872,95 +1893,142 @@ function update_vehicle($post_id) {
 	}
 }
 function vehicle_search_form() {
-	$search = '<form  method="post" action="" class="vehicle-filters">';
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		$filters = array(
+			    "make" => $_POST['searchMake'],
+			    "fuel" => $_POST['searchFuel'],
+			    "minPrice" => $_POST['searchMinPrice'],
+			    "maxPrice" => $_POST['searchMaxPrice'],
+			    "model" => $_POST['searchModel'],
+			    "age" => $_POST['searchAge'],
+			    "maxMileage" => $_POST['searchMaxMileage'],
+			    "body" => $_POST['searchBody'],
+			    "gear" => $_POST['searchGear'],
+			    "engine" => $_POST['searchEngine'],
+			    "colour" => $_POST['searchColour'],
+			    "minSeats" => $_POST['searchMinSeats'],
+			    "maxSeats" => $_POST['searchMaxSeats'],
+			    "keyword" => $_POST['searchKeyword']
+			);
+	}
+	$search = '<form  id="vfilters" method="post" action="" class="vehicle-filters">';
 	$search.= '<input type="hidden" name="search-vehicle" value="searchVahicle">';
 	$search.= '<div class="vehicle-form-first-row">';
-	$search.= '<select name="searchMake" id="search-make">
-			   <option value=""> Make (any) </option>
-			   <option value="volkswagen"> Volkswagen </option>
-			   <option value="Porsche"> Porsche </option>
-			   </select>';
-	$search.= '<input type=text id="vehicle-search" placeholder="Fuel Type (any)" name="searchFuel">';
-	$search.= '<select name="searchMinPrice" id="search-min-price">
-			   <option value=""> Min Price </option>
-			   <option value="5000"> 5000 </option>
-			   <option value="10000"> 10000 </option>
-			   <option value="50000"> 50000 </option>
-			   <option value="100000"> 100000 </option>
-			   </select>';
-	$search.= '<select name="searchMaxPrice" id="search-max-price">
-			   <option value=""> Max Price </option>
-			   <option value="5000"> 5000 </option>
-			   <option value="10000"> 10000 </option>
-			   <option value="50000"> 50000 </option>
-			   <option value="100000"> 100000 </option>
-			   </select>';
+
+	$types = array('volkswagen','Porsche');
+	$type = isset($filters['make']) && in_array($filters['make'],$types)?$filters['make']:'Make (any)';
+	$search.= '<select name="searchMake" id="search-make">';
+	$search.= '<option value=""> Make (any) </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
+	$search.= '<input type=text id="vehicle-search" placeholder="Fuel Type (any)" name="searchFuel" value='.$filters['fuel'].'>';
+
+	$types = array('5000','10000', '50000', '100000');
+	$type = isset($filters['minPrice']) && in_array($filters['minPrice'],$types)?$filters['minPrice']:'';
+	$search.= '<select name="searchMinPrice" id="search-min-price">';
+	$search.= '<option value=""> Min Price </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
+	$types = array('5000','10000', '50000', '100000');
+	$type = isset($filters['maxPrice']) && in_array($filters['maxPrice'],$types)?$filters['maxPrice']:'';
+	$search.= '<select name="searchMaxPrice" id="search-max-price">';
+	$search.= '<option value=""> Max Price </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
 	$search.= '</div>';
 	$search.= '<div class="vehicle-form-second-row">';
-	$search.= '<input type=text id="vehicle-search-model" placeholder="Model (any)" name="searchModel">';
-	$search.= '<select name="searchAge" id="search-age">
-			   <option value=""> Age (any) </option>
-			   <option value="10"> 10 </option>
-			   <option value="20"> 20 </option>
-			   <option value="50"> 50 </option>
-			   <option value="100"> 100 </option>
-			   </select>';
-	$search.= '<select name="searchMaxMileage" id="search-max-mileage">
-			   <option value=""> Max Mileage </option>
-			   <option value="10"> 10 </option>
-			   <option value="12"> 12 </option>
-			   <option value="15"> 15 </option>
-			   <option value="17"> 17 </option>
-			   <option value="20"> 20 </option>
-			   <option value="22"> 22 </option>
-			   <option value="25"> 25 </option>
-			   </select>';
+	$search.= '<input type=text id="vehicle-search-model" placeholder="Model (any)" name="searchModel" value='.$filters['model'].'>';
+	
+	$types = array('10','12', '15', '20');
+	$type = isset($filters['age']) && in_array($filters['age'],$types)?$filters['age']:'';
+	$search.= '<select name="searchAge" id="search-age">';
+	$search.= '<option value=""> Age (any) </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
+	$types = array('10','12', '15', '17', '20', '22', '25');
+	$type = isset($filters['age']) && in_array($filters['age'],$types)?$filters['age']:'';
+	$search.= '<select name="searchMaxMileage" id="search-max-mileage">';
+	$search.= '<option value=""> Max Mileage </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
 	$search.= '</div>';
 	$search.= '<div class="vehicle-form-third-row">';
-	$search.= '<select name="searchBody" id="search-body">
-			   <option value=""> Body Type (any) </option>
-			   <option value="volkswagen"> Volkswagen </option>
-			   <option value="porsche"> Porsche </option>
-			   </select>';
-	$search.= '<select name="searchGear" id="search-gearbox">
-			   <option value=""> Gearbox (any) </option>
-			   <option value="5000"> 5000 </option>
-			   <option value="10000"> 10000 </option>
-			   <option value="50000"> 50000 </option>
-			   <option value="100000"> 100000 </option>
-			   </select>';
-	$search.= '<select name="searchEngine" id="search-engine">
-			   <option value=""> Engine Size (any) </option>
-			   <option value="1968cc"> 1968cc </option>
-			   </select>';
+
+	$types = array('volkswagen','porsche');
+	$type = isset($filters['body']) && in_array($filters['body'],$types)?$filters['body']:'';
+	$search.= '<select name="searchBody" id="search-body">';
+	$search.= '<option value=""> Body Type (any) </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
+	$types = array('gear box 5rx','gear box 12rx');
+	$type = isset($filters['gear']) && in_array($filters['gear'],$types)?$filters['gear']:'';
+	$search.= '<select name="searchGear" id="search-gearbox">';
+	$search.= '<option value=""> Gearbox (any) </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
+	$types = array('1968cc','2268cc');
+	$type = isset($filters['engine']) && in_array($filters['engine'],$types)?$filters['engine']:'';
+	$search.= '<select name="searchEngine" id="search-engine">';
+	$search.= '<option value=""> Engine Size (any) </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
 	$search.= '</div>';
 	$search.= '<div class="vehicle-form-fourth-row">';
-	$search.= '<select name="searchColour" id="search-colour">
-			   <option value=""> Colour (all) </option>
-			   <option value="silver"> Silver </option>
-			   <option value="red"> Red </option>
-			   <option value="green"> green </option>
-			   <option value="black"> Black </option>
-			   <option value="white"> White </option>
-			   <option value="grey"> Grey </option>
-			   </select>';
-	$search.= '<select name="searchMinSeats" id="search-min-seats">
-			   <option value=""> Min Seats (any) </option>
-			   <option value="2"> 2 </option>
-			   <option value="5"> 5 </option>
-			   <option value="7"> 7 </option>
-			   <option value="9"> 9 </option>
-			   </select>';
-	$search.= '<select name="searchMaxSeats" id="search-max-seats">
-			   <option value=""> Max Seats (any) </option>
-			   <option value="2"> 2 </option>
-			   <option value="5"> 5 </option>
-			   <option value="7"> 7 </option>
-			   <option value="9"> 9 </option>
-			   </select>';
+	
+	$types = array('silver','red', 'green', 'black', 'white', 'grey');
+	$type = isset($filters['colour']) && in_array($filters['colour'],$types)?$filters['colour']:'';
+	$search.= '<select name="searchColour" id="search-colour">';
+	$search.= '<option value=""> Colour (all) </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+	
+	$types = array('2','5', '7', '9');
+	$type = isset($filters['minSeats']) && in_array($filters['minSeats'],$types)?$filters['minSeats']:'';
+	$search.= '<select name="searchMinSeats" id="search-min-seats">';
+	$search.= '<option value=""> Min Seats (any) </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
+	$types = array('2','5', '7', '9');
+	$type = isset($filters['maxSeats']) && in_array($filters['maxSeats'],$types)?$filters['minSeats']:'';
+	$search.= '<select name="searchMaxSeats" id="search-max-seats">';
+	$search.= '<option value=""> Max Seats (any) </option>';
+	foreach($types as $option) {
+	    $search.= '<option value="'.$option.'"'.(strcmp($option,$type)==0?' selected="selected"':'').'>'.$option.'</option>';
+	}
+	$search.= '</select>';
+
 	$search.= '</div>';
 	$search.= '<div class="vehicle-form-last-row">';
-	$search.= '<input type=text id="search-key" placeholder="Add keyword: e.g white transit tips" name="searchKey"/>';
+	$search.= '<input type=text id="search-key" placeholder="Add keyword: e.g white transit tips" name="searchKeyword" value='.$filters['keyword'].'>';
 	$search.= '<input type="submit" name="vehicle-search-form" id="vehicle-submit" value="Search"/></div></form>';
 	echo $search;
 } 
@@ -2061,12 +2129,24 @@ function get_customers() {
     	$spNotes = get_post_meta($post_id, 'wpcf-special-notes',true);
     	echo '<tr><td>'.$firstName.'</td><td>'.$surname .'</td><td>'.$compName .'</td><td>'.$mobNo.'</td><td>'.$email.'</td><td>'.$vat.'</td></tr>';
     	echo '<tr><td class="edit_button"><a href ="'.home_url().'/edit-customer/?pid='.$post_id.'">Edit</a></td>';
-    	echo "<td class='edit_button'><a href=\"".get_delete_post_link( $post_id )."\"onclick=\"return confirm('Are you sure, you want to delete?')\">Delete</a>";
+    	echo '<td class="edit_button"><a href="#" data-href="'.get_delete_post_link( $post_id ).'" data-toggle="modal" data-target="#confirm-delete">Delete</a>';
     	echo "</td><td></td><td></td><td></td><td></td></tr>";
+    	echo '<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-body">
+			               <p>Are you sure you want to delete this customer?</p>
+			            </div>
+			            <div class="modal-footer">
+			                <a class="btn btn-danger btn-ok">Delete</a>
+			            	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			            </div>
+			        </div>
+			    </div>
+			</div>';
     endwhile;
     echo "</table>";
-    next_posts_link('next');
-    previous_posts_link('previous');
+    wp_pagenavi();
     wp_reset_query();
 }
 

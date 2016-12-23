@@ -1,21 +1,25 @@
 jQuery( document ).ready(function() {
-	//Toggle sidebar left
-	jQuery('.toggle').click(function(){
-		jQuery('.sidebar_left').toggleClass("sidebar-collapsed");
-		if (jQuery('.sidebar_left').hasClass("sidebar-collapsed")) {
- 			jQuery('.toggle').addClass("toggle-collapsed");
- 			jQuery('.page-content').removeClass("col-lg-9");
- 			jQuery('.page-content').addClass("col-full-width");
-    	}else {
-    		jQuery('.page-content').addClass("col-lg-9");
-    		jQuery('.toggle').removeClass("toggle-collapsed");
-    		jQuery('.page-content').removeClass("col-full-width");
-    	}
-	});
-	//Add datepicker in form
-	jQuery('.datepick').each(function(){
-    	jQuery(this).datepicker();
-	});
+  //Toggle sidebar left
+  jQuery('.toggle').click(function(){
+    jQuery('.sidebar_left').toggleClass("sidebar-collapsed");
+    if (jQuery('.sidebar_left').hasClass("sidebar-collapsed")) {
+      jQuery('.toggle').addClass("toggle-collapsed");
+      jQuery('.page-content').removeClass("col-lg-9");
+      jQuery('.page-content').addClass("col-full-width");
+      }else {
+        jQuery('.page-content').addClass("col-lg-9");
+        jQuery('.toggle').removeClass("toggle-collapsed");
+        jQuery('.page-content').removeClass("col-full-width");
+      }
+  });
+  //Add datepicker in form
+  jQuery('.datepick').each(function(){
+      jQuery(this).datepicker();
+  });
+  //Delete posts button
+  jQuery('#confirm-delete').on('show.bs.modal', function(e) {
+      jQuery(this).find('.btn-ok').attr('href', jQuery(e.relatedTarget).data('href'));
+  });
 });
 
 jQuery(document).ready(function($) {

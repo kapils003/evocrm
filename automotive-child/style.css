@@ -198,7 +198,7 @@ div#bs-example-navbar-collapse-1 {
     font-size: 48px;
     font-weight: 500;
     width: 32%;
-    margin: 8px 5px 8px 0;
+    margin: 5px 5px 5px 0;
     padding: 20px 5px 10px;
     min-height: 240px;
     line-height: 1;
@@ -747,3 +747,40 @@ rect {
     margin-top: 10%;
     width: 60% !important;
 }
+
+/*-------css for home page time and clock section--------*/
+.wp-time {
+    font-size: 200px;
+    line-height: 1;
+    font-family: myriad pro;
+    letter-spacing: -5px;
+    color: #bcbdc0;
+}
+.wp-time span {
+    font-size: 50px;
+    display: inline-block;
+    color: #bcbdc0;
+    font-family: myriad pro;
+    margin-left: -48px;
+}
+.wp-date {
+    font-size: 21px;
+    font-family: myriad pro;
+    color: #bcbdc0;
+}
+/*-------css for home page time and clock section end--------*/
+#menu-item-18 a:before {
+    background-image:url(http://www.evocrm.co.uk/wp-content/uploads/2016/12/Vehicles-Pink.png);
+    content: "";
+    visibility: hidden;
+}
+#menu-item-18 a:hover:before {
+    visibility: visible;
+    height: 70px;
+    width: 70px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.menu-sidebar-menu-container .menu #menu-item-18 a:hover img {
+    display: none;
+}   

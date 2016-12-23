@@ -58,7 +58,7 @@ if(is_search()){
         } ?>
 
         <!--Header Start-->
-        <header>
+        <header class="header">
             <?php if(isset($awp_options['header_top']) && $awp_options['header_top'] == 1){ ?>
             <section class="toolbar">
                 <!-- <div class="container"> -->
@@ -170,61 +170,7 @@ if(is_search()){
             if(empty($header_image) && isset($awp_options['default_header_image']) && !empty($awp_options['default_header_image'])){
                 $header_image = $awp_options['default_header_image']['url'];
             }
-            
-            // no header
-            if(isset($no_header) && $no_header != "no_header"){ ?>
-
-        <section id="secondary-banner" class="<?php echo ($action == "on" ? "action_on" : ""); ?>"<?php echo (isset($header_image) && !empty($header_image) ? " style='background-image: url(" . $header_image . ");'" : ""); ?>>
-            <!-- <div class="container"> -->
-                <div class="row">
-                    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
-                        <?php 
-                        if(is_search() || is_tag() || is_category() || is_404() || (function_exists("is_product_category") && is_product_category()) || function_exists("is_product_tag") && is_product_tag() || function_exists("is_shop") && is_shop() || (get_option('show_on_front') == "posts" && is_home())){                         
-                            $title      = (isset($awp_options[$handle . '_page_title']) && !empty($awp_options[$handle . '_page_title']) ? $awp_options[$handle . '_page_title'] : "");
-                            $desc       = (isset($awp_options[$handle . '_page_secondary_title']) && !empty($awp_options[$handle . '_page_secondary_title']) ? $awp_options[$handle . '_page_secondary_title'] : "");
-                            $breadcrumb = (isset($awp_options[$handle . '_page_breadcrumb']) && !empty($awp_options[$handle . '_page_breadcrumb']) ? $awp_options[$handle . '_page_breadcrumb'] : "");
-                            
-                            // determine if variable
-                            $query = "{query}";
-                            if(is_search()){
-                                $title      = (strstr($title, $query) ? str_replace($query, get_search_query(), $title) : $title);
-                                $desc       = (strstr($desc, $query) ? str_replace($query, get_search_query(), $desc) : $desc);
-                                $breadcrumb = (strstr($breadcrumb, $query) ? str_replace($query, get_search_query(), $breadcrumb) : $breadcrumb);
-                            } elseif(is_tag()){
-                                $tag        = single_tag_title("", false);
-                                $title      = (strstr($title, $query) ? str_replace($query, $tag, $title) : $title);
-                                $desc       = (strstr($desc, $query) ? str_replace($query, $tag, $desc) : $desc);
-                                $breadcrumb = (strstr($breadcrumb, $query) ? str_replace($query, $tag, $breadcrumb) : $breadcrumb);
-                            } elseif(is_category()){
-                                $category   = single_cat_title("", false);
-                                $title      = (strstr($title, $query) ? str_replace($query, $category, $title) : $title);
-                                $desc       = (strstr($desc, $query) ? str_replace($query, $category, $desc) : $desc);
-                                $breadcrumb = (strstr($breadcrumb, $query) ? str_replace($query, $category, $breadcrumb) : $breadcrumb);
-                            } elseif( (function_exists("is_product_category") && is_product_category()) || (function_exists("is_product_tag") && is_product_tag()) || (function_exists("is_shop") && is_shop()) ){
-                                $category   = single_term_title('', false);
-                                $title      = (strstr($title, $query) ? str_replace($query, $category, $title) : $title);
-                                $desc       = (strstr($desc, $query) ? str_replace($query, $category, $desc) : $desc);
-                                $breadcrumb = (strstr($breadcrumb, $query) ? str_replace($query, $category, $breadcrumb) : $breadcrumb);                                
-                            }
-                        } else {                        
-                            $titles = get_page_title_and_desc();                        
-                            $title  = $titles[0];
-                            $desc   = $titles[1]; 
-                        }
-                        ?>
-                        <h1><?php echo $title; ?></h1>
-                        <h4><?php echo $desc; ?></h4>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
-                        <?php echo (isset($awp_options['breadcrumb_functionality']) && $awp_options['breadcrumb_functionality'] != 0 ? the_breadcrumb((isset($breadcrumb) && !empty($breadcrumb) ? $breadcrumb : "")) : ""); ?>
-                    </div>
-                </div>
-            <!-- </div> -->
-        </section>
-        <!--#secondary-banner ends-->
-            <?php } ?>
-        
-        <?php } 
+        } 
         
         if(isset($action) && $action != "on"){
             echo '<div class="message-shadow"></div>';

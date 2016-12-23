@@ -23,7 +23,7 @@
                 wp_reset_postdata();
                 $post_id = $_GET['pid'];
                 if(isset($post_id)) {
-	                update_vehicle_form($post_id);
+	                update_vehicle_form($post_id, 'edit');
                 }
                 ?>
         	</div>
